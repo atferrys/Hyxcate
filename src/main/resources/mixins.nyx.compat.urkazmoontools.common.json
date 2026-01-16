@@ -1,0 +1,7 @@
+{
+  "package": "de.ellpeck.nyx.compat.urkazmoontools.mixin.common",
+  "refmap": "mixins.nyx.refmap.json",
+  "mixins": [
+    "UMTMoonSensorBlockMixin"
+  ]
+}

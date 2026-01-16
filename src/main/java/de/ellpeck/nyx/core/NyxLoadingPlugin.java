@@ -13,14 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-@SuppressWarnings("serial")
 @IFMLLoadingPlugin.Name("NyxCore")
 @IFMLLoadingPlugin.MCVersion(ForgeVersion.mcVersion)
 @IFMLLoadingPlugin.SortingIndex(Integer.MIN_VALUE)
 public class NyxLoadingPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     public static final boolean isClient = FMLLaunchHandler.side().isClient();
-    public static final boolean isDev = FMLLaunchHandler.isDeobfuscatedEnvironment();
     private static final Map<String, Supplier<Boolean>> serversideMixinConfigs = ImmutableMap.copyOf(new HashMap<String, Supplier<Boolean>>() {
         {
 
