@@ -21,7 +21,6 @@ public class NyxEntityFallingStar extends Entity {
 
     public NyxEntityFallingStar(World worldIn) {
         super(worldIn);
-        this.setEntityBoundingBox(null);
         this.initTrajectory(1);
     }
 
