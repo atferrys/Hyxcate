@@ -128,12 +128,7 @@
 Want to help translating? Submit a [**Pull Request**](https://github.com/Elite-Modding-Team/Hyxcate/pulls) or send your translation via [**Discord**](https://acgam.ing/discord)!
 
 ### 🔊 Sound Credits
-- Horror sting by SamsterBirdies -- https://freesound.org/s/522567/ -- License: Creative Commons 0
-- Organ Sting by nomiqbomi -- https://freesound.org/s/578805/ -- License: Creative Commons 0
-- Victory (short sting) by xkeril -- https://freesound.org/s/706753/ -- License: Creative Commons 0
-- StarsTwinklingB.wav by aj_heels -- https://freesound.org/s/520542/ -- License: Attribution 4.0
-- Fire Breath.wav by bspiller5 -- https://freesound.org/s/157616/ -- License: Creative Commons 0
-- Scary noise by SamsterBirdies -- https://freesound.org/s/555382/ -- License: Creative Commons 0
+- Sci-Fi Computer Sounds and Beeps by Michel Baradari -- https://opengameart.org/content/9-sci-fi-computer-sounds-and-beeps -- License: CC-BY 3.0
 - Red Sun in the Sky - Note Block Cover by Jimmy145 -- https://youtu.be/PCERgEtiX7c
 
 ---
