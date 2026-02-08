@@ -24,6 +24,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -148,7 +149,7 @@ public class NyxUtils {
         DimensionType dim = world.provider.getDimensionType();
         if (dim == DimensionType.THE_END) return NyxConfig.METEORS.chanceEnd;
         if (!NyxData.ALLOWED_DIMENSIONS_LUNAR.contains(dim.getId())) return 0;
-        boolean visitedGate = data.visitedDimensions.contains(NyxConfig.METEORS.gateDimension);
+        boolean visitedGate = data.visitedDimensions.contains(DimensionType.getById(NyxConfig.METEORS.gateDimension).getName());
         if (!NyxWorld.isDaytime(world)) {
             if (data.currentLunarEvent instanceof NyxEventStarShower) {
                 return NyxConfig.METEORS.chanceStarShower;

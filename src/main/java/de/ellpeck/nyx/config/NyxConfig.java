@@ -423,7 +423,7 @@ public class NyxConfig {
 
         @Config.Name("Gate Dimension")
         @Config.Comment("The dimension that needs to be entered to increase the spawning of meteors")
-        public String gateDimension = "the_end";
+        public int gateDimension = 1;
 
         @Config.Name("Chance After Gate Visit")
         @Config.Comment("The chance of a meteor spawning every second, during the day, after the gate dimension has been entered once")
