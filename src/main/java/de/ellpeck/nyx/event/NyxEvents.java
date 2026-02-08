@@ -220,7 +220,7 @@ public final class NyxEvents {
         data.update();
 
         // Falling Stars
-        if (!event.world.isRemote && NyxConfig.MASTER_SWITCHES.fallingStarsEnabled && !NyxWorld.isDaytime(event.world) && event.world.getTotalWorldTime() % 20 == 0) {
+        if (!event.world.isRemote && NyxConfig.MASTER_SWITCHES.fallingStarEventsEnabled && !NyxWorld.isDaytime(event.world) && event.world.getTotalWorldTime() % 20 == 0) {
             String dimension = event.world.provider.getDimensionType().getName();
             if (NyxUtils.ALLOWED_DIMENSIONS_LUNAR.contains(dimension)) {
                 for (EntityPlayer player : event.world.playerEntities) {
@@ -238,7 +238,7 @@ public final class NyxEvents {
 
         // Meteors
         meteors:
-        if (!event.world.isRemote && NyxConfig.MASTER_SWITCHES.meteorsEnabled && event.world.getTotalWorldTime() % 20 == 0) {
+        if (!event.world.isRemote && NyxConfig.MASTER_SWITCHES.meteorEventsEnabled && event.world.getTotalWorldTime() % 20 == 0) {
             if (event.world.playerEntities.isEmpty()) break meteors;
             EntityPlayer selectedPlayer = event.world.playerEntities.get(event.world.rand.nextInt(event.world.playerEntities.size()));
             if (selectedPlayer == null) break meteors;

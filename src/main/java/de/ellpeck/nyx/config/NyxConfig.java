@@ -37,13 +37,13 @@ public class NyxConfig {
         @Config.Comment("If solar events should be enabled")
         public boolean solarEventsEnabled = true;
 
-        @Config.Name("Meteors")
+        @Config.Name("Events: Meteors")
         @Config.Comment("If meteors falling from the sky should be enabled")
-        public boolean meteorsEnabled = true;
+        public boolean meteorEventsEnabled = true;
 
-        @Config.Name("Falling Stars")
+        @Config.Name("Events: Falling Stars")
         @Config.Comment("If falling stars (including during star showers) should be enabled")
-        public boolean fallingStarsEnabled = true;
+        public boolean fallingStarEventsEnabled = true;
 
         @Config.Name("Enchantments")
         @Config.Comment("If enchantments should be enabled")

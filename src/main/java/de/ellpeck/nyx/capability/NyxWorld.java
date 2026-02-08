@@ -86,7 +86,7 @@ public class NyxWorld implements ICapabilityProvider, INBTSerializable<NBTTagCom
     }
 
     public void update() {
-        if (NyxConfig.MASTER_SWITCHES.meteorsEnabled) updateMeteors();
+        if (NyxConfig.MASTER_SWITCHES.meteorEventsEnabled) updateMeteors();
         if (NyxConfig.MASTER_SWITCHES.lunarEventsEnabled) updateLunarEvents();
         if (NyxConfig.MASTER_SWITCHES.solarEventsEnabled) updateSolarEvents();
     }

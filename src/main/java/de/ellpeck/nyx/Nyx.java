@@ -65,6 +65,6 @@ public class Nyx {
     @EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new NyxCommandForce());
-        if (NyxConfig.MASTER_SWITCHES.meteorsEnabled) event.registerServerCommand(new NyxCommandMeteor());
+        if (NyxConfig.MASTER_SWITCHES.meteorEventsEnabled) event.registerServerCommand(new NyxCommandMeteor());
     }
 }
