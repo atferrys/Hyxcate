@@ -3,6 +3,7 @@ package de.ellpeck.nyx.entity;
 import de.ellpeck.nyx.Nyx;
 import de.ellpeck.nyx.capability.NyxWorld;
 import de.ellpeck.nyx.config.NyxConfig;
+import de.ellpeck.nyx.config.NyxData;
 import de.ellpeck.nyx.init.NyxBlocks;
 import de.ellpeck.nyx.init.NyxSoundEvents;
 import net.minecraft.block.Block;
@@ -58,54 +59,40 @@ public class NyxEntityFallingMeteor extends NyxEntityFallingStar {
 
     private Block getMeteorBlock() {
         switch (this.dataManager.get(TYPE)) {
-            case 1: // Meteorite
-                return this.rand.nextBoolean() ? NyxBlocks.meteoriteRockHot : NyxBlocks.meteoriteRock;
             case 2: // Frezarite
-                return this.rand.nextBoolean() ? NyxBlocks.frezariteRock : Blocks.PACKED_ICE;
+                return NyxData.METEOR_BLOCKS_FREZARITE.get(this.rand.nextInt(NyxData.METEOR_BLOCKS_FREZARITE.size()));
             case 3: // Kreknorite
-                return this.rand.nextBoolean() ? NyxBlocks.kreknoriteRock : Blocks.OBSIDIAN;
+                return NyxData.METEOR_BLOCKS_KREKNORITE.get(this.rand.nextInt(NyxData.METEOR_BLOCKS_KREKNORITE.size()));
             case 4: // Unknown
-                switch (this.rand.nextInt(6)) {
-                    case 0:
-                        return NyxBlocks.meteoriteRockHot;
-                    case 1:
-                        return NyxBlocks.meteoriteRock;
-                    case 2:
-                        return NyxBlocks.frezariteRock;
-                    case 3:
-                        return NyxBlocks.kreknoriteRock;
-                    case 4:
-                        return Blocks.PACKED_ICE;
-                    case 5:
-                        return Blocks.OBSIDIAN;
-                }
+                return NyxData.METEOR_BLOCKS_UNKNOWN.get(this.rand.nextInt(NyxData.METEOR_BLOCKS_UNKNOWN.size()));
+            default: // Meteorite
+                return NyxData.METEOR_BLOCKS_METEORITE.get(this.rand.nextInt(NyxData.METEOR_BLOCKS_METEORITE.size()));
         }
-        return Blocks.AIR;
     }
 
     private Block getFillerBlock() {
         switch (this.dataManager.get(TYPE)) {
             case 2: // Frezarite
-                return Blocks.PACKED_ICE;
+                return NyxData.FILLER_BLOCKS_FREZARITE.get(this.rand.nextInt(NyxData.FILLER_BLOCKS_FREZARITE.size()));
             case 3: // Kreknorite
-                return Blocks.MAGMA;
+                return NyxData.FILLER_BLOCKS_KREKNORITE.get(this.rand.nextInt(NyxData.FILLER_BLOCKS_KREKNORITE.size()));
             case 4: // Unknown
-                return this.rand.nextBoolean() ? Blocks.MAGMA : Blocks.PACKED_ICE;
+                return NyxData.FILLER_BLOCKS_UNKNOWN.get(this.rand.nextInt(NyxData.FILLER_BLOCKS_UNKNOWN.size()));
             default: // Meteorite
-                return Blocks.MAGMA;
+                return NyxData.FILLER_BLOCKS_METEORITE.get(this.rand.nextInt(NyxData.FILLER_BLOCKS_METEORITE.size()));
         }
     }
 
     private Block getLiquidBlock() {
         switch (this.dataManager.get(TYPE)) {
             case 2: // Frezarite
-                return Blocks.WATER;
+                return NyxData.LIQUID_BLOCKS_FREZARITE.get(this.rand.nextInt(NyxData.LIQUID_BLOCKS_FREZARITE.size()));
             case 3: // Kreknorite
-                return Blocks.LAVA;
+                return NyxData.LIQUID_BLOCKS_KREKNORITE.get(this.rand.nextInt(NyxData.LIQUID_BLOCKS_KREKNORITE.size()));
             case 4: // Unknown
-                return this.rand.nextBoolean() ? Blocks.LAVA : Blocks.WATER;
+                return NyxData.LIQUID_BLOCKS_UNKNOWN.get(this.rand.nextInt(NyxData.LIQUID_BLOCKS_UNKNOWN.size()));
             default: // Meteorite
-                return null;
+                return NyxData.LIQUID_BLOCKS_METEORITE.get(this.rand.nextInt(NyxData.LIQUID_BLOCKS_METEORITE.size()));
         }
     }
 
@@ -192,7 +179,7 @@ public class NyxEntityFallingMeteor extends NyxEntityFallingStar {
                                 int snowLayers = this.world.rand.nextInt(3) + 1;
                                 this.world.setBlockState(affected, this.rand.nextBoolean() ? Blocks.FIRE.getDefaultState() : Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, snowLayers));
                             }
-                        } else if (this.getLiquidBlock() != null && this.world.rand.nextInt(10) == 0) {
+                        } else if (this.world.rand.nextInt(10) == 0) {
                             this.world.setBlockState(affected, this.getLiquidBlock().getDefaultState());
                         } else if (this.world.rand.nextBoolean()) {
                             this.world.setBlockState(affected, this.getMeteorBlock().getDefaultState());

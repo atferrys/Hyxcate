@@ -1,7 +1,7 @@
 package de.ellpeck.nyx.init;
 
-import de.ellpeck.nyx.config.NyxConfig;
 import de.ellpeck.nyx.Nyx;
+import de.ellpeck.nyx.config.NyxConfig;
 import de.ellpeck.nyx.item.*;
 import de.ellpeck.nyx.item.tool.NyxToolBeamSword;
 import de.ellpeck.nyx.item.tool.NyxToolCelestialWarhammer;

@@ -6,10 +6,10 @@ import de.ellpeck.nyx.compat.NyxCompatHandler;
 import de.ellpeck.nyx.compat.datafixes.NyxBlockDataFixer;
 import de.ellpeck.nyx.compat.datafixes.NyxItemDataFixer;
 import de.ellpeck.nyx.config.NyxConfig;
+import de.ellpeck.nyx.config.NyxData;
 import de.ellpeck.nyx.init.NyxRegistry;
 import de.ellpeck.nyx.network.NyxPacketHandler;
 import de.ellpeck.nyx.proxy.NyxCommonProxy;
-import de.ellpeck.nyx.util.NyxUtils;
 import mod.emt.nyx.Tags;
 import net.minecraft.util.datafix.FixTypes;
 import net.minecraftforge.common.util.ModFixs;
@@ -58,7 +58,7 @@ public class Nyx {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        NyxUtils.initConfigLists();
+        NyxData.initConfigLists();
         NyxCompatHandler.postInit();
     }
 

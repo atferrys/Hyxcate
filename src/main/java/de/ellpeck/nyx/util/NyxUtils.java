@@ -7,6 +7,7 @@ import de.ellpeck.nyx.client.sound.NyxSoundCelestialWarhammer;
 import de.ellpeck.nyx.client.sound.NyxSoundFallenEntity;
 import de.ellpeck.nyx.client.sound.NyxSoundFallingEntity;
 import de.ellpeck.nyx.config.NyxConfig;
+import de.ellpeck.nyx.config.NyxData;
 import de.ellpeck.nyx.event.lunar.NyxEventStarShower;
 import de.ellpeck.nyx.init.NyxSoundEvents;
 import net.minecraft.client.Minecraft;
@@ -26,23 +27,11 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 // Courtesy of UeberallGebannt for the chance methods
 public class NyxUtils {
     public static final Random RANDOM = new Random();
-    public static final List<String> ALLOWED_DIMENSIONS_LUNAR = new ArrayList<>();
-    public static final List<String> ALLOWED_DIMENSIONS_SOLAR = new ArrayList<>();
-    public static final List<String> MOB_DUPLICATION_LIST = new ArrayList<>();
-
-    public static void initConfigLists() {
-        ALLOWED_DIMENSIONS_LUNAR.addAll(Arrays.asList(NyxConfig.EVENTS_LUNAR.allowedDimensions));
-        ALLOWED_DIMENSIONS_SOLAR.addAll(Arrays.asList(NyxConfig.EVENTS_SOLAR.allowedDimensions));
-        MOB_DUPLICATION_LIST.addAll(Arrays.asList(NyxConfig.EVENTS_LUNAR.mobDuplicationList));
-    }
 
     public static ItemStack checkNBT(ItemStack stack) {
         if (stack.getTagCompound() == null) {
@@ -89,7 +78,7 @@ public class NyxUtils {
         if (!original.getEntityData().getBoolean(addedSpawnKey)) {
             ResourceLocation name = EntityList.getKey(original);
             if (name != null) {
-                boolean listed = NyxUtils.MOB_DUPLICATION_LIST.contains(name.toString());
+                boolean listed = NyxData.MOB_DUPLICATION_LIST.contains(name.toString());
                 if (NyxConfig.EVENTS_LUNAR.isMobDuplicationWhitelist != listed) return;
 
                 for (int x = -2; x <= 2; x++) {
@@ -122,7 +111,7 @@ public class NyxUtils {
         if (!original.getEntityData().getBoolean(addedSpawnKey)) {
             ResourceLocation name = EntityList.getKey(original);
             if (name != null) {
-                boolean listed = NyxUtils.MOB_DUPLICATION_LIST.contains(name.toString());
+                boolean listed = NyxData.MOB_DUPLICATION_LIST.contains(name.toString());
                 if (NyxConfig.EVENTS_LUNAR.isMobDuplicationWhitelist != listed) return;
                 if (!WorldEntitySpawner.canCreatureTypeSpawnAtLocation(EntityLiving.SpawnPlacementType.ON_GROUND, original.world, original.getPosition()))
                     return;
@@ -139,11 +128,9 @@ public class NyxUtils {
 
     public static double getMeteorChance(World world, NyxWorld data) {
         DimensionType dim = world.provider.getDimensionType();
-        if (dim == DimensionType.THE_END)
-            return NyxConfig.METEORS.chanceEnd;
+        if (dim == DimensionType.THE_END) return NyxConfig.METEORS.chanceEnd;
 
-        if (!NyxUtils.ALLOWED_DIMENSIONS_LUNAR.contains(dim.getName()))
-            return 0;
+        if (!NyxData.ALLOWED_DIMENSIONS_LUNAR.contains(dim.getName())) return 0;
         boolean visitedGate = data.visitedDimensions.contains(NyxConfig.METEORS.gateDimension);
         if (!NyxWorld.isDaytime(world)) {
             if (data.currentLunarEvent instanceof NyxEventStarShower) {

@@ -2,6 +2,7 @@ package de.ellpeck.nyx.capability;
 
 import de.ellpeck.nyx.compat.astralsorcery.AstralSorcery;
 import de.ellpeck.nyx.config.NyxConfig;
+import de.ellpeck.nyx.config.NyxData;
 import de.ellpeck.nyx.event.lunar.*;
 import de.ellpeck.nyx.event.solar.NyxEventGrimEclipse;
 import de.ellpeck.nyx.event.solar.NyxEventRedGiant;
@@ -9,7 +10,6 @@ import de.ellpeck.nyx.event.solar.NyxSolarEvent;
 import de.ellpeck.nyx.init.NyxRegistry;
 import de.ellpeck.nyx.network.NyxPacketHandler;
 import de.ellpeck.nyx.network.NyxPacketWorld;
-import de.ellpeck.nyx.util.NyxUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -127,7 +127,7 @@ public class NyxWorld implements ICapabilityProvider, INBTSerializable<NBTTagCom
 
     public void updateLunarEvents() {
         String dimension = this.world.provider.getDimensionType().getName();
-        if (NyxUtils.ALLOWED_DIMENSIONS_LUNAR.contains(dimension)) {
+        if (NyxData.ALLOWED_DIMENSIONS_LUNAR.contains(dimension)) {
             moonPhase = this.world.getCurrentMoonPhaseFactor();
 
             for (NyxLunarEvent event : this.lunarEvents)
@@ -184,7 +184,7 @@ public class NyxWorld implements ICapabilityProvider, INBTSerializable<NBTTagCom
 
     public void updateSolarEvents() {
         String dimension = this.world.provider.getDimensionType().getName();
-        if (NyxUtils.ALLOWED_DIMENSIONS_SOLAR.contains(dimension)) {
+        if (NyxData.ALLOWED_DIMENSIONS_SOLAR.contains(dimension)) {
 
             for (NyxSolarEvent event : this.solarEvents)
                 event.update(this.wasNighttime);

@@ -1,7 +1,6 @@
 package de.ellpeck.nyx.config;
 
 import de.ellpeck.nyx.Nyx;
-import de.ellpeck.nyx.util.NyxUtils;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -375,6 +374,88 @@ public class NyxConfig {
         @Config.Name("Chat Message Verbose")
         @Config.Comment("If chat messages for meteor impacts should include coordinates")
         public boolean messageVerbose = false;
+
+        @Config.Name("Meteor Blocks: Meteorite")
+        @Config.Comment("Main blocks that are spawned on impact of regular meteors")
+        public String[] meteorBlocksMeteorite = new String[]{
+                "nyx:meteorite_rock_hot",
+                "nyx:meteorite_rock"
+        };
+
+        @Config.Name("Meteor Blocks: Frezarite")
+        @Config.Comment("Main blocks that are spawned on impact of cold meteors")
+        public String[] meteorBlocksFrezarite = new String[]{
+                "nyx:frezarite_rock",
+                "minecraft:packed_ice"
+        };
+
+        @Config.Name("Meteor Blocks: Kreknorite")
+        @Config.Comment("Main blocks that are spawned on impact of hot meteors")
+        public String[] meteorBlocksKreknorite = new String[]{
+                "nyx:kreknorite_rock",
+                "minecraft:obsidian"
+        };
+
+        @Config.Name("Meteor Blocks: Unknown")
+        @Config.Comment("Main blocks that are spawned on impact of mixed meteors")
+        public String[] meteorBlocksUnknown = new String[]{
+                "nyx:meteorite_rock_hot",
+                "nyx:meteorite_rock",
+                "nyx:frezarite_rock",
+                "nyx:kreknorite_rock",
+                "minecraft:packed_ice",
+                "minecraft:obsidian"
+        };
+
+        @Config.Name("Filler Blocks: Meteorite")
+        @Config.Comment("Subsidiary blocks that are spawned on impact of regular meteors")
+        public String[] fillerBlocksMeteorite = new String[]{
+                "minecraft:magma"
+        };
+
+        @Config.Name("Filler Blocks: Frezarite")
+        @Config.Comment("Subsidiary blocks that are spawned on impact of cold meteors")
+        public String[] fillerBlocksFrezarite = new String[]{
+                "minecraft:packed_ice"
+        };
+
+        @Config.Name("Filler Blocks: Kreknorite")
+        @Config.Comment("Subsidiary blocks that are spawned on impact of hot meteors")
+        public String[] fillerBlocksKreknorite = new String[]{
+                "minecraft:magma"
+        };
+
+        @Config.Name("Filler Blocks: Unknown")
+        @Config.Comment("Subsidiary blocks that are spawned on impact of mixed meteors")
+        public String[] fillerBlocksUnknown = new String[]{
+                "minecraft:magma",
+                "minecraft:packed_ice"
+        };
+
+        @Config.Name("Liquid Blocks: Meteorite")
+        @Config.Comment("Fluid blocks that are spawned on impact of regular meteors")
+        public String[] liquidBlocksMeteorite = new String[]{
+                "minecraft:air"
+        };
+
+        @Config.Name("Liquid Blocks: Frezarite")
+        @Config.Comment("Fluid blocks that are spawned on impact of cold meteors")
+        public String[] liquidBlocksFrezarite = new String[]{
+                "minecraft:water"
+        };
+
+        @Config.Name("Liquid Blocks: Kreknorite")
+        @Config.Comment("Fluid blocks that are spawned on impact of hot meteors")
+        public String[] liquidBlocksKreknorite = new String[]{
+                "minecraft:lava"
+        };
+
+        @Config.Name("Liquid Blocks: Unknown")
+        @Config.Comment("Fluid blocks that are spawned on impact of mixed meteors")
+        public String[] liquidBlocksUnknown = new String[]{
+                "minecraft:lava",
+                "minecraft:water"
+        };
     }
 
     @Mod.EventBusSubscriber(modid = Nyx.ID)
@@ -383,7 +464,7 @@ public class NyxConfig {
         public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
             if (event.getModID().equals(Nyx.ID)) {
                 ConfigManager.sync(Nyx.ID, Config.Type.INSTANCE);
-                NyxUtils.initConfigLists();
+                NyxData.initConfigLists();
             }
         }
     }
