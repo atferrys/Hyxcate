@@ -152,7 +152,7 @@ public class NyxConfig {
 
             @Config.Name("On Full Moon")
             @Config.Comment("If the Blood Moon should only occur on full moon nights")
-            public boolean onFullMoon = true;
+            public boolean onFullMoon = false;
 
             @Config.Name("Sky Color")
             @Config.Comment("The hex code of the Blood Moon's sky color")
@@ -212,7 +212,7 @@ public class NyxConfig {
 
             @Config.Name("On Full Moon")
             @Config.Comment("If the Blue Moon should only occur on full moon nights")
-            public boolean onFullMoon = true;
+            public boolean onFullMoon = false;
 
             @Config.Name("Sky Color")
             @Config.Comment("The hex code of the Blue Moon's sky color")
@@ -297,7 +297,7 @@ public class NyxConfig {
 
             @Config.Name("On Full Moon")
             @Config.Comment("If the Star Shower should only occur on full moon nights")
-            public boolean onFullMoon = true;
+            public boolean onFullMoon = false;
 
             @Config.Name("Sky Color")
             @Config.Comment("The hex code of the Star Shower's sky color")
