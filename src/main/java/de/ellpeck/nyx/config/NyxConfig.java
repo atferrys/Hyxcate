@@ -151,7 +151,7 @@ public class NyxConfig {
             public int gracePeriod = 8;
 
             @Config.Name("On Full Moon")
-            @Config.Comment("If the blood moon should only occur on full moon nights")
+            @Config.Comment("If the Blood Moon should only occur on full moon nights")
             public boolean onFullMoon = true;
 
             @Config.Name("Sky Color")
@@ -159,20 +159,20 @@ public class NyxConfig {
             public int skyColor = 0x420d03;
 
             @Config.Name("Sleeping")
-            @Config.Comment("If sleeping is allowed during a blood moon")
+            @Config.Comment("If sleeping is allowed during a Blood Moon")
             public boolean sleeping = false;
 
             @Config.Name("Spawn Multiplier")
-            @Config.Comment("The multiplier with which mobs should spawn during the blood moon (eg 2 means 2 mobs spawn instead of 1)")
+            @Config.Comment("The multiplier with which mobs should spawn during the Blood Moon (eg 2 means 2 mobs spawn instead of 1)")
             @Config.RangeInt(min = 1, max = 1000)
             public int spawnMultiplier = 2;
 
             @Config.Name("Spawn Radius")
-            @Config.Comment({"The closest distance that mobs can spawn away from a player during the blood moon", "Vanilla value is 24"})
+            @Config.Comment({"The closest distance that mobs can spawn away from a player during the Blood Moon", "Vanilla value is 24"})
             public int spawnRadius = 20;
 
             @Config.Name("Mobs Vanish")
-            @Config.Comment("If mobs spawned by the blood moon should die at sunup")
+            @Config.Comment("If mobs spawned by the Blood Moon should die at sunrise")
             public boolean mobsVanish = true;
 
             @Config.Name("Extra Spawns")
@@ -294,6 +294,10 @@ public class NyxConfig {
             @Config.Comment("The amount of nights that should pass until Star Showers happen again")
             @Config.RangeInt(min = 0)
             public int gracePeriod = 15;
+
+            @Config.Name("On Full Moon")
+            @Config.Comment("If the Star Shower should only occur on full moon nights")
+            public boolean onFullMoon = true;
 
             @Config.Name("Sky Color")
             @Config.Comment("The hex code of the Star Shower's sky color")

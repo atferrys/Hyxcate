@@ -31,6 +31,7 @@ public class NyxEventStarShower extends NyxLunarEvent {
 
     @Override
     public boolean shouldStart(boolean lastDaytime) {
+        if (NyxConfig.EVENTS_LUNAR.STAR_SHOWER.onFullMoon && this.world.getCurrentMoonPhaseFactor() < 1) return false;
         if (!lastDaytime || NyxWorld.isDaytime(this.world)) return false;
         return this.config.canStart(true);
     }
