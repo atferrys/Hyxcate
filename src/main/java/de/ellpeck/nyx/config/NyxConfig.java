@@ -61,7 +61,7 @@ public class NyxConfig {
         public boolean meteorDetectorEnabled = true;
 
         @Config.Name("Equipment: Meteor Gear")
-        @Config.Comment("If all tools and armor made out of meteor materials (meteorite, frezarite, kreknorite, and tektite) should be enabled")
+        @Config.Comment("If all tools and armor made out of meteor materials (Meteorite, Frezarite, Kreknorite, and Tektite) should be enabled")
         public boolean meteorGearEnabled = true;
     }
 
