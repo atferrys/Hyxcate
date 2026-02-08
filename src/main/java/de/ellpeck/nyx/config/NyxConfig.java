@@ -116,7 +116,7 @@ public class NyxConfig {
         public final StarShower STAR_SHOWER = new StarShower();
 
         @Config.Name("Allowed Dimensions")
-        @Config.Comment("Names of the dimensions that lunar events should occur in")
+        @Config.Comment("The numeric dimension IDs that lunar events should occur in")
         public Integer[] allowedDimensions = new Integer[]{0};
 
         @Config.Name("Mob Duplication List")
@@ -252,7 +252,7 @@ public class NyxConfig {
         public final RedGiant RED_GIANT = new RedGiant();
 
         @Config.Name("Allowed Dimensions")
-        @Config.Comment("Names of the dimensions that solar events should occur in")
+        @Config.Comment("The numeric dimension IDs that solar events should occur in")
         public Integer[] allowedDimensions = new Integer[]{0};
 
         public static class GrimEclipse {
