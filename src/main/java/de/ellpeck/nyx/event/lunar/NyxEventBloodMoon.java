@@ -4,7 +4,6 @@ import com.google.common.collect.Sets;
 import de.ellpeck.nyx.Nyx;
 import de.ellpeck.nyx.capability.NyxWorld;
 import de.ellpeck.nyx.config.NyxConfig;
-import de.ellpeck.nyx.config.NyxData;
 import de.ellpeck.nyx.init.NyxSoundEvents;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.*;
@@ -199,7 +198,7 @@ public class NyxEventBloodMoon extends NyxLunarEvent {
 
                                                 // edit: only spawn allowed mobs
                                                 ResourceLocation name = EntityList.getKey(entityliving);
-                                                if (name == null || NyxConfig.EVENTS_LUNAR.isMobDuplicationWhitelist != NyxData.MOB_DUPLICATION_LIST.contains(name.toString())) {
+                                                if (name == null) {
                                                     // it looks like setting entry to null here selects a new random entity to spawn
                                                     entry = null;
                                                     continue;

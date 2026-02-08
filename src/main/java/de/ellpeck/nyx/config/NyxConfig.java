@@ -119,14 +119,6 @@ public class NyxConfig {
         @Config.Comment("The numeric IDs of the dimensions that lunar events should occur in")
         public Integer[] allowedDimensions = new Integer[]{0};
 
-        @Config.Name("Mob Duplication List")
-        @Config.Comment({"The registry names of entities that should not be spawned during the full and blood moons", "If isMobDuplicationWhitelist is true, this acts as a whitelist instead"})
-        public String[] mobDuplicationList = new String[]{};
-
-        @Config.Name("Is Mob Duplication Whitelist")
-        @Config.Comment("If the mobDuplicationBlacklist should act as a whitelist instead")
-        public boolean isMobDuplicationWhitelist = false;
-
         public static class BloodMoon {
             @Config.Name("Chance")
             @Config.Comment("The chance in percent (1 = 100%) of the Blood Moon occurring")
@@ -168,6 +160,19 @@ public class NyxConfig {
             @Config.Name("Mobs Vanish")
             @Config.Comment("If mobs spawned by the blood moon should die at sunup")
             public boolean mobsVanish = true;
+
+            @Config.Name("Extra Spawns")
+            @Config.Comment({"The registry names of entities that should spawn additionally alongside other entities during the event", "Syntax: originalEntity;extraEntity"})
+            public String[] spawnsExtra = new String[]{};
+
+            @Config.Name("Extra Spawns Chance")
+            @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during the event", "The higher the number, the less likely", "Set to 0 to disable"})
+            @Config.RangeInt(min = 0, max = 1000)
+            public int spawnsExtraChance = 5;
+
+            @Config.Name("Replacement Spawns")
+            @Config.Comment({"The registry names of entities that should replace other entities during the event", "Syntax: originalEntity;replacementEntity"})
+            public String[] spawnsReplacement = new String[]{};
         }
 
         public static class BlueMoon {
@@ -204,6 +209,23 @@ public class NyxConfig {
             @Config.Comment("The amount of ticks that should pass before plants are grown again during the Blue Moon")
             @Config.RangeInt(min = 1, max = 100)
             public int growInterval = 10;
+
+            @Config.Name("Peaceful Night")
+            @Config.Comment("If the Blue Moon should prevent all hostile mob spawns except slimes")
+            public boolean peacefulNight = true;
+
+            @Config.Name("Extra Spawns")
+            @Config.Comment({"The registry names of entities that should spawn additionally alongside other entities during the event", "Syntax: originalEntity;extraEntity"})
+            public String[] spawnsExtra = new String[]{};
+
+            @Config.Name("Extra Spawns Chance")
+            @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during the event", "The higher the number, the less likely", "Set to 0 to disable"})
+            @Config.RangeInt(min = 0, max = 1000)
+            public int spawnsExtraChance = 5;
+
+            @Config.Name("Replacement Spawns")
+            @Config.Comment({"The registry names of entities that should replace other entities during the event", "Syntax: originalEntity;replacementEntity"})
+            public String[] spawnsReplacement = new String[]{};
         }
 
         public static class FullMoon {
@@ -215,10 +237,23 @@ public class NyxConfig {
             @Config.Comment("If mobs spawned during a full moon should have random potion effects applied to them (similarly to spiders in the base game)")
             public boolean addPotionEffects = true;
 
-            @Config.Name("Additional Mobs Chance")
-            @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during a full moon", "The higher the number, the less likely", "Set to 0 to disable"})
+            @Config.Name("Extra Spawns")
+            @Config.Comment({"The registry names of entities that should spawn additionally alongside other entities during the event", "Syntax: originalEntity;extraEntity"})
+            public String[] spawnsExtra = new String[]{
+                    "minecraft:zombie;minecraft:zombie",
+                    "minecraft:skeleton;minecraft:skeleton",
+                    "minecraft:creeper;minecraft:creeper",
+                    "minecraft:spider;minecraft:spider"
+            };
+
+            @Config.Name("Extra Spawns Chance")
+            @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during the event", "The higher the number, the less likely", "Set to 0 to disable"})
             @Config.RangeInt(min = 0, max = 1000)
-            public int additionalMobsChance = 5;
+            public int spawnsExtraChance = 5;
+
+            @Config.Name("Replacement Spawns")
+            @Config.Comment({"The registry names of entities that should replace other entities during the event", "Syntax: originalEntity;replacementEntity"})
+            public String[] spawnsReplacement = new String[]{};
         }
 
         public static class StarShower {
@@ -241,6 +276,19 @@ public class NyxConfig {
             @Config.Comment("The amount of nights that should pass until Star Showers happen again")
             @Config.RangeInt(min = 0)
             public int gracePeriod = 15;
+
+            @Config.Name("Extra Spawns")
+            @Config.Comment({"The registry names of entities that should spawn additionally alongside other entities during the event", "Syntax: originalEntity;extraEntity"})
+            public String[] spawnsExtra = new String[]{};
+
+            @Config.Name("Extra Spawns Chance")
+            @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during the event", "The higher the number, the less likely", "Set to 0 to disable"})
+            @Config.RangeInt(min = 0, max = 1000)
+            public int spawnsExtraChance = 5;
+
+            @Config.Name("Replacement Spawns")
+            @Config.Comment({"The registry names of entities that should replace other entities during the event", "Syntax: originalEntity;replacementEntity"})
+            public String[] spawnsReplacement = new String[]{};
         }
     }
 
@@ -275,6 +323,19 @@ public class NyxConfig {
             @Config.Comment("The amount of days that should pass until the Grim Eclipse happens again")
             @Config.RangeInt(min = 0)
             public int gracePeriod = 8;
+
+            @Config.Name("Extra Spawns")
+            @Config.Comment({"The registry names of entities that should spawn additionally alongside other entities during the event", "Syntax: originalEntity;extraEntity"})
+            public String[] spawnsExtra = new String[]{};
+
+            @Config.Name("Extra Spawns Chance")
+            @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during the event", "The higher the number, the less likely", "Set to 0 to disable"})
+            @Config.RangeInt(min = 0, max = 1000)
+            public int spawnsExtraChance = 5;
+
+            @Config.Name("Replacement Spawns")
+            @Config.Comment({"The registry names of entities that should replace other entities during the event", "Syntax: originalEntity;replacementEntity"})
+            public String[] spawnsReplacement = new String[]{};
         }
 
         public static class RedGiant {
@@ -297,6 +358,23 @@ public class NyxConfig {
             @Config.Comment("The amount of days that should pass until the Red Giant happens again")
             @Config.RangeInt(min = 0)
             public int gracePeriod = 15;
+
+            @Config.Name("Extra Spawns")
+            @Config.Comment({"The registry names of entities that should spawn additionally alongside other entities during the event", "Syntax: originalEntity;extraEntity"})
+            public String[] spawnsExtra = new String[]{};
+
+            @Config.Name("Extra Spawns Chance")
+            @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during the event", "The higher the number, the less likely", "Set to 0 to disable"})
+            @Config.RangeInt(min = 0, max = 1000)
+            public int spawnsExtraChance = 5;
+
+            @Config.Name("Replacement Spawns")
+            @Config.Comment({"The registry names of entities that should replace other entities during the event", "Syntax: originalEntity;replacementEntity"})
+            public String[] spawnsReplacement = new String[]{
+                    "minecraft:zombie;minecraft:husk",
+                    "minecraft:skeleton;minecraft:wither_skeleton",
+                    "minecraft:slime;minecraft:magma_cube"
+            };
         }
     }
 

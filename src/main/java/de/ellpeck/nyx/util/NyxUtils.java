@@ -27,6 +27,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Map;
 import java.util.Random;
 
 // Courtesy of UeberallGebannt for the chance methods
@@ -73,14 +74,21 @@ public class NyxUtils {
         return stack;
     }
 
-    public static void doExtraSpawn(Entity original, String key) {
+    public static boolean handleExtraSpawn(Entity entity, String key, Map<ResourceLocation, ResourceLocation> map) {
+        ResourceLocation name = EntityList.getKey(entity);
+        if (map.containsKey(name)) {
+            Entity extra = EntityList.createEntityByIDFromName(map.get(name), entity.world);
+            doExtraSpawn(entity, key, extra);
+            return true;
+        }
+        return false;
+    }
+
+    public static void doExtraSpawn(Entity original, String key, Entity extra) {
         String addedSpawnKey = Nyx.ID + ":" + key;
         if (!original.getEntityData().getBoolean(addedSpawnKey)) {
-            ResourceLocation name = EntityList.getKey(original);
+            ResourceLocation name = EntityList.getKey(extra);
             if (name != null) {
-                boolean listed = NyxData.MOB_DUPLICATION_LIST.contains(name.toString());
-                if (NyxConfig.EVENTS_LUNAR.isMobDuplicationWhitelist != listed) return;
-
                 for (int x = -2; x <= 2; x++) {
                     for (int y = -2; y <= 2; y++) {
                         for (int z = -2; z <= 2; z++) {
@@ -106,13 +114,23 @@ public class NyxUtils {
         }
     }
 
+    public static boolean handleReplacementSpawn(Entity entity, String key, Map<ResourceLocation, ResourceLocation> map) {
+        ResourceLocation name = EntityList.getKey(entity);
+        if (map.containsKey(name)) {
+            Entity replacement = EntityList.createEntityByIDFromName(map.get(name), entity.world);
+            if (replacement instanceof EntityLiving) {
+                doReplacementSpawn(entity, key, (EntityLiving) replacement);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void doReplacementSpawn(Entity original, String key, EntityLiving replacement) {
         String addedSpawnKey = Nyx.ID + ":" + key;
         if (!original.getEntityData().getBoolean(addedSpawnKey)) {
             ResourceLocation name = EntityList.getKey(original);
             if (name != null) {
-                boolean listed = NyxData.MOB_DUPLICATION_LIST.contains(name.toString());
-                if (NyxConfig.EVENTS_LUNAR.isMobDuplicationWhitelist != listed) return;
                 if (!WorldEntitySpawner.canCreatureTypeSpawnAtLocation(EntityLiving.SpawnPlacementType.ON_GROUND, original.world, original.getPosition()))
                     return;
                 replacement.setLocationAndAngles(original.posX, original.posY, original.posZ, MathHelper.wrapDegrees(original.world.rand.nextFloat() * 360), 0);

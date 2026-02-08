@@ -27,11 +27,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.*;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -326,23 +331,39 @@ public final class NyxEvents {
         EntityLivingBase entity = event.getEntityLiving();
         if (!(entity instanceof IMob || entity instanceof EntityMob) || entity instanceof EntitySlime) return;
 
-        // Don't spawn mobs during harvest moon
+        // Don't spawn mobs during blue moon
         if (event.getSpawner() == null) {
             NyxWorld nyx = NyxWorld.get(entity.world);
-            if (nyx != null && nyx.currentLunarEvent instanceof NyxEventBlueMoon) event.setResult(Event.Result.DENY);
+            if (nyx != null && nyx.currentLunarEvent instanceof NyxEventBlueMoon && NyxConfig.EVENTS_LUNAR.BLUE_MOON.peacefulNight) {
+                event.setResult(Event.Result.DENY);
+            }
         }
     }
 
     @SubscribeEvent
     public static void onSpawn(LivingSpawnEvent.SpecialSpawn event) {
         EntityLivingBase entity = event.getEntityLiving();
-        if (!(entity instanceof IMob || entity instanceof EntityMob)) return;
         NyxWorld nyx = NyxWorld.get(entity.world);
         if (nyx == null) return;
 
-        if (nyx.currentLunarEvent instanceof NyxEventFullMoon) {
+        if (nyx.currentLunarEvent instanceof NyxEventBloodMoon) {
+            if (NyxConfig.EVENTS_LUNAR.BLOOD_MOON.spawnsExtraChance > 0 && entity.world.rand.nextInt(NyxConfig.EVENTS_LUNAR.BLOOD_MOON.spawnsExtraChance) == 0) {
+                NyxUtils.handleExtraSpawn(entity, "blood_moon_spawn", NyxData.EXTRA_SPAWNS_BLOOD_MOON);
+            }
+            event.setCanceled(NyxUtils.handleReplacementSpawn(entity, "blood_moon_spawn", NyxData.REPLACEMENT_SPAWNS_BLOOD_MOON));
+        } else if (nyx.currentLunarEvent instanceof NyxEventBlueMoon) {
+            if (NyxConfig.EVENTS_LUNAR.BLUE_MOON.spawnsExtraChance > 0 && entity.world.rand.nextInt(NyxConfig.EVENTS_LUNAR.BLUE_MOON.spawnsExtraChance) == 0) {
+                NyxUtils.handleExtraSpawn(entity, "blue_moon_spawn", NyxData.EXTRA_SPAWNS_BLUE_MOON);
+            }
+            event.setCanceled(NyxUtils.handleReplacementSpawn(entity, "blue_moon_spawn", NyxData.REPLACEMENT_SPAWNS_BLUE_MOON));
+        } else if (nyx.currentLunarEvent instanceof NyxEventFullMoon) {
+            if (NyxConfig.EVENTS_LUNAR.FULL_MOON.spawnsExtraChance > 0 && entity.world.rand.nextInt(NyxConfig.EVENTS_LUNAR.FULL_MOON.spawnsExtraChance) == 0) {
+                NyxUtils.handleExtraSpawn(entity, "full_moon_spawn", NyxData.EXTRA_SPAWNS_FULL_MOON);
+            }
+            event.setCanceled(NyxUtils.handleReplacementSpawn(entity, "full_moon_spawn", NyxData.REPLACEMENT_SPAWNS_FULL_MOON));
+
             // Set random effect
-            if (NyxConfig.EVENTS_LUNAR.FULL_MOON.addPotionEffects && !(entity instanceof EntityCreeper)) {
+            if (NyxConfig.EVENTS_LUNAR.FULL_MOON.addPotionEffects) {
                 Potion effect = null;
                 int i = entity.world.rand.nextInt(20);
 
@@ -358,39 +379,30 @@ public final class NyxEvents {
 
                 if (effect != null) entity.addPotionEffect(new PotionEffect(effect, Integer.MAX_VALUE));
             }
-
-            // Spawn a second one
-            if (NyxConfig.EVENTS_LUNAR.FULL_MOON.additionalMobsChance > 0 && entity.world.rand.nextInt(NyxConfig.EVENTS_LUNAR.FULL_MOON.additionalMobsChance) == 0)
-                NyxUtils.doExtraSpawn(entity, "full_moon_spawn");
+        } else if (nyx.currentLunarEvent instanceof NyxEventStarShower) {
+            if (NyxConfig.EVENTS_LUNAR.STAR_SHOWER.spawnsExtraChance > 0 && entity.world.rand.nextInt(NyxConfig.EVENTS_LUNAR.STAR_SHOWER.spawnsExtraChance) == 0) {
+                NyxUtils.handleExtraSpawn(entity, "star_shower_spawn", NyxData.EXTRA_SPAWNS_STAR_SHOWER);
+            }
+            event.setCanceled(NyxUtils.handleReplacementSpawn(entity, "star_shower_spawn", NyxData.REPLACEMENT_SPAWNS_STAR_SHOWER));
         }
 
-        if (nyx.currentSolarEvent instanceof NyxEventRedGiant) {
+        if (nyx.currentSolarEvent instanceof NyxEventGrimEclipse) {
+            if (NyxConfig.EVENTS_SOLAR.GRIM_ECLIPSE.spawnsExtraChance > 0 && entity.world.rand.nextInt(NyxConfig.EVENTS_SOLAR.GRIM_ECLIPSE.spawnsExtraChance) == 0) {
+                NyxUtils.handleExtraSpawn(entity, "grim_eclipse_spawn", NyxData.EXTRA_SPAWNS_GRIM_ECLIPSE);
+            }
+            event.setCanceled(NyxUtils.handleReplacementSpawn(entity, "grim_eclipse_spawn", NyxData.REPLACEMENT_SPAWNS_GRIM_ECLIPSE));
+        } else if (nyx.currentSolarEvent instanceof NyxEventRedGiant) {
+            if (NyxConfig.EVENTS_SOLAR.RED_GIANT.spawnsExtraChance > 0 && entity.world.rand.nextInt(NyxConfig.EVENTS_SOLAR.RED_GIANT.spawnsExtraChance) == 0) {
+                NyxUtils.handleExtraSpawn(entity, "red_giant_spawn", NyxData.EXTRA_SPAWNS_RED_GIANT);
+            }
+            event.setCanceled(NyxUtils.handleReplacementSpawn(entity, "red_giant_spawn", NyxData.REPLACEMENT_SPAWNS_RED_GIANT));
+
             // Increase health by 50%, make immune to fire
             IAttributeInstance maxHealthAttribute = entity.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
             double newMaxHealth = maxHealthAttribute.getBaseValue() * 1.5;
             maxHealthAttribute.setBaseValue(newMaxHealth);
             entity.setHealth((float) newMaxHealth);
             if (!entity.isImmuneToFire()) ((NyxEntityAccessor) entity).setIsImmuneToFire(true);
-
-            // Replace vanilla mobs
-            // TODO: Expose to config
-            ResourceLocation entityRL = EntityList.getKey(entity);
-            if (entityRL != null) {
-                switch (entityRL.toString()) {
-                    case "minecraft:zombie":
-                        NyxUtils.doReplacementSpawn(entity, "red_giant_spawn", new EntityHusk(entity.world));
-                        event.setCanceled(true);
-                        break;
-                    case "minecraft:skeleton":
-                        NyxUtils.doReplacementSpawn(entity, "red_giant_spawn", new EntityWitherSkeleton(entity.world));
-                        event.setCanceled(true);
-                        break;
-                    case "minecraft:slime":
-                        NyxUtils.doReplacementSpawn(entity, "red_giant_spawn", new EntityMagmaCube(entity.world));
-                        event.setCanceled(true);
-                        break;
-                }
-            }
         }
     }
 
