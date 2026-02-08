@@ -45,6 +45,11 @@ public class NyxEventRedGiant extends NyxSolarEvent {
     }
 
     @Override
+    public int getLightmapColor() {
+        return NyxConfig.EVENTS_SOLAR.RED_GIANT.lightmapColor;
+    }
+
+    @Override
     public String getSunTexture() {
         return "red_giant";
     }

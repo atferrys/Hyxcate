@@ -24,13 +24,13 @@ public abstract class NyxLightmapColorsMixin {
         if (nyxWorld == null || nyxWorld.currentSkyColor == 0 || (!NyxConfig.GENERAL.eventTintUnderground && skyLight == 0))
             return;
         if (nyxWorld.currentSolarEvent != null) {
-            float[] customLightmapColors = NyxColorUtils.getRgbIntAsFloatArray(NyxColorUtils.adjustBrightness(nyxWorld.currentSolarEvent.getSkyColor(), 2.0F));
+            float[] customLightmapColors = NyxColorUtils.getRgbIntAsFloatArray(NyxColorUtils.adjustBrightness(nyxWorld.currentSolarEvent.getLightmapColor(), 2.0F));
             colors[0] *= customLightmapColors[0];
             colors[1] *= customLightmapColors[1];
             colors[2] *= customLightmapColors[2];
         }
         if (nyxWorld.currentLunarEvent != null) {
-            float[] customLightmapColors = NyxColorUtils.getRgbIntAsFloatArray(nyxWorld.currentLunarEvent.getSkyColor());
+            float[] customLightmapColors = NyxColorUtils.getRgbIntAsFloatArray(nyxWorld.currentLunarEvent.getLightmapColor());
             colors[0] *= customLightmapColors[0];
             colors[1] *= customLightmapColors[1];
             colors[2] *= customLightmapColors[2];

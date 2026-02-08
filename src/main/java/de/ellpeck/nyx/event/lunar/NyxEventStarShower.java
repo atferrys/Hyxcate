@@ -47,6 +47,11 @@ public class NyxEventStarShower extends NyxLunarEvent {
     }
 
     @Override
+    public int getLightmapColor() {
+        return NyxConfig.EVENTS_LUNAR.STAR_SHOWER.lightmapColor;
+    }
+
+    @Override
     public String getMoonTexture() {
         return "starry_moon";
     }

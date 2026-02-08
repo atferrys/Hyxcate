@@ -45,6 +45,11 @@ public class NyxEventGrimEclipse extends NyxSolarEvent {
     }
 
     @Override
+    public int getLightmapColor() {
+        return NyxConfig.EVENTS_SOLAR.GRIM_ECLIPSE.lightmapColor;
+    }
+
+    @Override
     public String getSunTexture() {
         return "grim_eclipse";
     }

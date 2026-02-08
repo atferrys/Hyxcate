@@ -37,6 +37,10 @@ public abstract class NyxLunarEvent implements INBTSerializable<NBTTagCompound> 
         return 0;
     }
 
+    public int getLightmapColor() {
+        return 0;
+    }
+
     public String getMoonTexture() {
         return null;
     }

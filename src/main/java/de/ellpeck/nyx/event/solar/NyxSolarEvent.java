@@ -37,6 +37,10 @@ public abstract class NyxSolarEvent implements INBTSerializable<NBTTagCompound> 
         return 0;
     }
 
+    public int getLightmapColor() {
+        return 0;
+    }
+
     public String getSunTexture() {
         return null;
     }

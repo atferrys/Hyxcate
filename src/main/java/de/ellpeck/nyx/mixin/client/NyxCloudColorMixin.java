@@ -19,8 +19,8 @@ public abstract class NyxCloudColorMixin {
         NyxWorld nyxWorld = NyxWorld.get((World) (Object) this);
         if (nyxWorld == null || nyxWorld.currentSkyColor == 0) return;
         if (nyxWorld.currentSolarEvent != null)
-            cir.setReturnValue(NyxColorUtils.getRgbIntAsVec3d(nyxWorld.currentSolarEvent.getSkyColor()));
+            cir.setReturnValue(NyxColorUtils.getRgbIntAsVec3d(nyxWorld.currentSolarEvent.getLightmapColor()));
         if (nyxWorld.currentLunarEvent != null)
-            cir.setReturnValue(NyxColorUtils.getRgbIntAsVec3d(nyxWorld.currentLunarEvent.getSkyColor()));
+            cir.setReturnValue(NyxColorUtils.getRgbIntAsVec3d(nyxWorld.currentLunarEvent.getLightmapColor()));
     }
 }
