@@ -184,7 +184,7 @@ public class NyxConfig {
             public boolean mobsVanish = true;
 
             @Config.Name("Exclusive Spawns")
-            @Config.Comment("The registry names of entities that should spawn exclusively on the surface during the event")
+            @Config.Comment({"The registry names of hostile entities that should spawn exclusively on the surface during the event (whitelist)", "Leave empty to allow all hostile entities to spawn"})
             public String[] spawnsExclusive = new String[]{};
 
             @Config.Name("Extra Spawns")
@@ -249,7 +249,7 @@ public class NyxConfig {
             public int growInterval = 10;
 
             @Config.Name("Exclusive Spawns")
-            @Config.Comment("The registry names of entities that should spawn exclusively on the surface during the event")
+            @Config.Comment({"The registry names of hostile entities that should spawn exclusively on the surface during the event (whitelist)", "Leave empty to allow all hostile entities to spawn"})
             public String[] spawnsExclusive = new String[]{
                     "minecraft:slime"
             };
@@ -278,7 +278,7 @@ public class NyxConfig {
             public boolean addPotionEffects = true;
 
             @Config.Name("Exclusive Spawns")
-            @Config.Comment("The registry names of entities that should spawn exclusively on the surface during the event")
+            @Config.Comment({"The registry names of hostile entities that should spawn exclusively on the surface during the event (whitelist)", "Leave empty to allow all hostile entities to spawn"})
             public String[] spawnsExclusive = new String[]{};
 
             @Config.Name("Extra Spawns")
@@ -338,7 +338,7 @@ public class NyxConfig {
             public boolean onFullMoon = false;
 
             @Config.Name("Exclusive Spawns")
-            @Config.Comment("The registry names of entities that should spawn exclusively on the surface during the event")
+            @Config.Comment({"The registry names of hostile entities that should spawn exclusively on the surface during the event (whitelist)", "Leave empty to allow all hostile entities to spawn"})
             public String[] spawnsExclusive = new String[]{};
 
             @Config.Name("Extra Spawns")
@@ -391,7 +391,7 @@ public class NyxConfig {
             public int gracePeriod = 8;
 
             @Config.Name("Exclusive Spawns")
-            @Config.Comment("The registry names of entities that should spawn exclusively on the surface during the event")
+            @Config.Comment({"The registry names of hostile entities that should spawn exclusively on the surface during the event (whitelist)", "Leave empty to allow all hostile entities to spawn"})
             public String[] spawnsExclusive = new String[]{};
 
             @Config.Name("Extra Spawns")
@@ -442,7 +442,7 @@ public class NyxConfig {
             public int gracePeriod = 15;
 
             @Config.Name("Exclusive Spawns")
-            @Config.Comment("The registry names of entities that should spawn exclusively on the surface during the event")
+            @Config.Comment({"The registry names of hostile entities that should spawn exclusively on the surface during the event (whitelist)", "Leave empty to allow all hostile entities to spawn"})
             public String[] spawnsExclusive = new String[]{};
 
             @Config.Name("Extra Spawns")
