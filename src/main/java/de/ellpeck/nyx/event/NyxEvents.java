@@ -4,6 +4,7 @@ import de.ellpeck.nyx.Nyx;
 import de.ellpeck.nyx.capability.NyxWorld;
 import de.ellpeck.nyx.config.NyxConfig;
 import de.ellpeck.nyx.config.NyxData;
+import de.ellpeck.nyx.entity.NyxEntityEyezor;
 import de.ellpeck.nyx.entity.NyxEntityFallingMeteor;
 import de.ellpeck.nyx.entity.NyxEntityFallingStar;
 import de.ellpeck.nyx.entity.ai.NyxAIWolfSpecialMoon;
@@ -546,6 +547,19 @@ public final class NyxEvents {
         if (event.getLeft().getItem() instanceof NyxToolBeamSword || event.getLeft().getItem() instanceof NyxToolCelestialWarhammer || event.getLeft().getItem() instanceof NyxToolTektiteGreatsword) {
             if (EnchantmentHelper.getEnchantments(event.getRight()).keySet().stream().anyMatch(e -> e == Enchantments.UNBREAKING)) {
                 event.setCanceled(true);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onZombieSummonAid(ZombieEvent.SummonAidEvent event) {
+        if (event.getEntity() instanceof NyxEntityEyezor) {
+            event.setCustomSummonedAid(new NyxEntityEyezor(event.getWorld()));
+
+            if (((EntityLivingBase) event.getEntity()).getRNG().nextFloat() < ((NyxEntityEyezor) event.getEntity()).getEntityAttribute(((NyxEntityEyezor) event.getEntity()).getReinforcementsAttribute()).getAttributeValue()) {
+                event.setResult(Event.Result.ALLOW);
+            } else {
+                event.setResult(Event.Result.DENY);
             }
         }
     }

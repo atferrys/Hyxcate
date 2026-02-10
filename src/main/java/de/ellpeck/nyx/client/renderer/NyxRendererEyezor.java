@@ -25,8 +25,8 @@ public class NyxRendererEyezor extends RenderBiped<NyxEntityEyezor> {
     }
 
     protected void preRenderCallback(NyxEntityEyezor entity, float partialTickTime) {
-        float f = 1.0625F;
-        GlStateManager.scale(f, f, f);
+        GlStateManager.scale(1.0625F, 1.0625F, 1.0625F);
+        if (entity.isChild()) GlStateManager.scale(0.505F, 0.505F, 0.505F);
     }
 
     @Override

@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackRanged;
+import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -26,13 +27,11 @@ public class NyxEntityEyezor extends EntityZombie implements IRangedAttackMob {
 
     public NyxEntityEyezor(World world) {
         super(world);
-        this.isImmuneToFire = true;
         this.dataManager.set(TYPE, world.rand.nextInt(4) + 1);
     }
 
     public NyxEntityEyezor(World world, int type) {
         super(world);
-        this.isImmuneToFire = true;
         this.dataManager.set(TYPE, type);
     }
 
@@ -52,7 +51,10 @@ public class NyxEntityEyezor extends EntityZombie implements IRangedAttackMob {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.26D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(7.0D);
     }
 
     @Nonnull
@@ -76,6 +78,15 @@ public class NyxEntityEyezor extends EntityZombie implements IRangedAttackMob {
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.dataManager.set(TYPE, compound.getInteger("type"));
+    }
+
+    public IAttribute getReinforcementsAttribute() {
+        return EntityZombie.SPAWN_REINFORCEMENTS_CHANCE;
+    }
+
+    @Override
+    protected boolean shouldBurnInDay() {
+        return false;
     }
 
     @Override
