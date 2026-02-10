@@ -205,18 +205,18 @@ public class NyxConfig {
 
             @Config.Name("Extra Spawns")
             @Config.Comment({"The registry names of entities that should spawn additionally alongside other entities during the event", "Syntax: originalEntity;extraEntity"})
-            public String[] spawnsExtra = new String[]{};
+            public String[] spawnsExtra = new String[]{
+                    "minecraft:zombie;nyx:eyezor"
+            };
 
             @Config.Name("Extra Spawns Chance")
             @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during the event", "The higher the number, the less likely", "Set to 0 to disable"})
             @Config.RangeInt(min = 0, max = 1000)
-            public int spawnsExtraChance = 5;
+            public int spawnsExtraChance = 10;
 
             @Config.Name("Replacement Spawns")
             @Config.Comment({"The registry names of entities that should replace other entities during the event", "Syntax: originalEntity;replacementEntity"})
-            public String[] spawnsReplacement = new String[]{
-                    "minecraft:zombie;nyx:eyezor"
-            };
+            public String[] spawnsReplacement = new String[]{};
         }
 
         public static class BlueMoon {
@@ -279,7 +279,7 @@ public class NyxConfig {
             @Config.Name("Extra Spawns Chance")
             @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during the event", "The higher the number, the less likely", "Set to 0 to disable"})
             @Config.RangeInt(min = 0, max = 1000)
-            public int spawnsExtraChance = 5;
+            public int spawnsExtraChance = 10;
 
             @Config.Name("Replacement Spawns")
             @Config.Comment({"The registry names of entities that should replace other entities during the event", "Syntax: originalEntity;replacementEntity"})
@@ -311,7 +311,7 @@ public class NyxConfig {
             @Config.Name("Extra Spawns Chance")
             @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during the event", "The higher the number, the less likely", "Set to 0 to disable"})
             @Config.RangeInt(min = 0, max = 1000)
-            public int spawnsExtraChance = 5;
+            public int spawnsExtraChance = 10;
 
             @Config.Name("Replacement Spawns")
             @Config.Comment({"The registry names of entities that should replace other entities during the event", "Syntax: originalEntity;replacementEntity"})
@@ -361,18 +361,18 @@ public class NyxConfig {
 
             @Config.Name("Extra Spawns")
             @Config.Comment({"The registry names of entities that should spawn additionally alongside other entities during the event", "Syntax: originalEntity;extraEntity"})
-            public String[] spawnsExtra = new String[]{};
+            public String[] spawnsExtra = new String[]{
+                    "minecraft:zombie;nyx:eyezor"
+            };
 
             @Config.Name("Extra Spawns Chance")
             @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during the event", "The higher the number, the less likely", "Set to 0 to disable"})
             @Config.RangeInt(min = 0, max = 1000)
-            public int spawnsExtraChance = 5;
+            public int spawnsExtraChance = 10;
 
             @Config.Name("Replacement Spawns")
             @Config.Comment({"The registry names of entities that should replace other entities during the event", "Syntax: originalEntity;replacementEntity"})
-            public String[] spawnsReplacement = new String[]{
-                    "minecraft:zombie;nyx:eyezor"
-            };
+            public String[] spawnsReplacement = new String[]{};
         }
     }
 
@@ -416,12 +416,14 @@ public class NyxConfig {
 
             @Config.Name("Extra Spawns")
             @Config.Comment({"The registry names of entities that should spawn additionally alongside other entities during the event", "Syntax: originalEntity;extraEntity"})
-            public String[] spawnsExtra = new String[]{};
+            public String[] spawnsExtra = new String[]{
+                    "minecraft:zombie;nyx:eyezor"
+            };
 
             @Config.Name("Extra Spawns Chance")
             @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during the event", "The higher the number, the less likely", "Set to 0 to disable"})
             @Config.RangeInt(min = 0, max = 1000)
-            public int spawnsExtraChance = 5;
+            public int spawnsExtraChance = 10;
 
             @Config.Name("Cloud Color")
             @Config.Comment("The hex code of the Grim Eclipse's cloud color")
@@ -437,9 +439,7 @@ public class NyxConfig {
 
             @Config.Name("Replacement Spawns")
             @Config.Comment({"The registry names of entities that should replace other entities during the event", "Syntax: originalEntity;replacementEntity"})
-            public String[] spawnsReplacement = new String[]{
-                    "minecraft:zombie;nyx:eyezor"
-            };
+            public String[] spawnsReplacement = new String[]{};
         }
 
         public static class RedGiant {
@@ -469,12 +469,14 @@ public class NyxConfig {
 
             @Config.Name("Extra Spawns")
             @Config.Comment({"The registry names of entities that should spawn additionally alongside other entities during the event", "Syntax: originalEntity;extraEntity"})
-            public String[] spawnsExtra = new String[]{};
+            public String[] spawnsExtra = new String[]{
+                    "minecraft:zombie;nyx:eyezor"
+            };
 
             @Config.Name("Extra Spawns Chance")
             @Config.Comment({"The chance for an additional mob to be spawned when a mob spawns during the event", "The higher the number, the less likely", "Set to 0 to disable"})
             @Config.RangeInt(min = 0, max = 1000)
-            public int spawnsExtraChance = 5;
+            public int spawnsExtraChance = 10;
 
             @Config.Name("Cloud Color")
             @Config.Comment("The hex code of the Red Giant's cloud color")
