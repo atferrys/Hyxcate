@@ -37,6 +37,8 @@ death.attack.nyx_deep_freeze=%1$s froze to death
 death.attack.nyx_deep_freeze.player=%1$s was frozen to death by %2$s
 death.attack.nyx_inferno=%1$s was consumed by the inferno
 death.attack.nyx_inferno.player=%1$s was infernalized to death by %2$s
+death.attack.nyx_laser=%1$s was vaporized by a laser beam
+death.attack.nyx_laser.player=%1$s vaporized by %2$s's laser beam
 death.attack.nyx_paralysis=%1$s couldn't contain the watts
 death.attack.nyx_paralysis.player=%1$s was paralyzed to death by %2$s
 

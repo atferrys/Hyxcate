@@ -28,9 +28,9 @@ public class NyxRendererLaser extends Render<NyxEntityLaser> {
         float b = (float) (hexColor & 255) / 255.0F;
 
         GlStateManager.pushMatrix();
-        GlStateManager.translate((float) x, (float) y + 0.1F, (float) z);
-        GlStateManager.rotate(entityYaw, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate(entity.rotationPitch, 1.0F, 0.0F, 0.0F);
+        GlStateManager.translate((float)x, (float)y, (float)z);
+        GlStateManager.rotate(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
         GlStateManager.disableTexture2D();
         GlStateManager.disableLighting();
         GlStateManager.disableBlend();
