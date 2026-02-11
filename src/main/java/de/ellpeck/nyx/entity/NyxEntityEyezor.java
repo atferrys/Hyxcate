@@ -36,6 +36,12 @@ public class NyxEntityEyezor extends EntityZombie implements IRangedAttackMob {
     }
 
     @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataManager.register(TYPE, 0);
+    }
+
+    @Override
     protected void initEntityAI() {
         super.initEntityAI();
         // TODO: Turn into unique hybrid AI
