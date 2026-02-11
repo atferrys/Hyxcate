@@ -27,18 +27,12 @@ public class NyxEntityEyezor extends EntityZombie implements IRangedAttackMob {
 
     public NyxEntityEyezor(World world) {
         super(world);
-        this.dataManager.set(TYPE, world.rand.nextInt(4) + 1);
+        this.dataManager.set(TYPE, 0);
     }
 
     public NyxEntityEyezor(World world, int type) {
         super(world);
         this.dataManager.set(TYPE, type);
-    }
-
-    @Override
-    protected void entityInit() {
-        super.entityInit();
-        this.dataManager.register(TYPE, 1);
     }
 
     @Override
