@@ -43,9 +43,13 @@
 
 #### 🐈 **Creatures**
 
-- **Alien Creeper:** This very dangerous creeper variant that is found exclusively at meteor crash sites has over 80 health and is always charged. Does not like being around **Alien Kitties** and **Comet Kitties**.
-- **Alien Kitty:** These cats are extraterrestrial and have 40 health! They are found exclusively at meteor crash sites and they tend to scare away **Alien Creepers**.
-- **Comet Kitty:** Same as the **Alien Kitty** except they're a super intelligent cat species exploring the depths of space. Some of them have hitched a ride on a meteor by accident.
+- **Meteors**
+  - **Alien Creeper:** This very dangerous creeper variant that is found exclusively at meteor crash sites has over 80 health and is always charged. Does not like being around **Alien Kitties** and **Comet Kitties**.
+  - **Alien Kitty:** These cats are extraterrestrial and have 40 health! They are found exclusively at meteor crash sites and they tend to scare away **Alien Creepers**.
+  - **Comet Kitty:** Same as the **Alien Kitty** except they're a super intelligent cat species exploring the depths of space. Some of them have hitched a ride on a meteor by accident.
+  
+- **Events**
+  - **Eyezor:** This zombie variant is slightly faster and shoots lasers!
 
 #### ☄️ Materials
 
@@ -107,6 +111,7 @@
 - Lead Developer/Owner ~ IcarussOne
 - Lead Developer ~ ACGaming
 - Sound Artist ~ PessiMysterio
+- Eyezor and a lot of other mob models ~ NicholasW
 - Texture Artist ~ Ichipie1125
 - Beam Sword textures, Alien Kitty textures, earlier weapon textures, and the space cat doodle on the bottom of this readme ~ Kimiko0402
 - Extensive feedback on earlier versions of the mod ~ xJon
