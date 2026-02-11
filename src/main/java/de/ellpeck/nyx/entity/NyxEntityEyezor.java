@@ -4,6 +4,7 @@ import de.ellpeck.nyx.config.NyxConfig;
 import de.ellpeck.nyx.init.NyxLootTables;
 import de.ellpeck.nyx.init.NyxSoundEvents;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackRanged;
@@ -17,6 +18,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -27,12 +29,6 @@ public class NyxEntityEyezor extends EntityZombie implements IRangedAttackMob {
 
     public NyxEntityEyezor(World world) {
         super(world);
-        this.dataManager.set(TYPE, 0);
-    }
-
-    public NyxEntityEyezor(World world, int type) {
-        super(world);
-        this.dataManager.set(TYPE, type);
     }
 
     @Override
@@ -78,6 +74,22 @@ public class NyxEntityEyezor extends EntityZombie implements IRangedAttackMob {
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.dataManager.set(TYPE, compound.getInteger("type"));
+    }
+
+    @Nullable
+    @Override
+    public IEntityLivingData onInitialSpawn(@Nonnull DifficultyInstance difficulty, @Nullable IEntityLivingData entityLivingData) {
+        this.setType(this.rand.nextInt(2));
+
+        return super.onInitialSpawn(difficulty, entityLivingData);
+    }
+
+    public int getType() {
+        return this.dataManager.get(TYPE);
+    }
+
+    public void setType(int skinType) {
+        this.dataManager.set(TYPE, skinType);
     }
 
     public IAttribute getReinforcementsAttribute() {

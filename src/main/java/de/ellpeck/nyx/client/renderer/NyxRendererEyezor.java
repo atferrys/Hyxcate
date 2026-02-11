@@ -11,7 +11,10 @@ import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.util.ResourceLocation;
 
 public class NyxRendererEyezor extends RenderBiped<NyxEntityEyezor> {
-    private static final ResourceLocation BASIC = new ResourceLocation(Nyx.ID, "textures/entities/eyezor/basic.png");
+    private static final ResourceLocation[] TEXTURES = new ResourceLocation[]{
+            new ResourceLocation(Nyx.ID, "textures/entities/eyezor/basic.png"),
+            new ResourceLocation(Nyx.ID, "textures/entities/eyezor/basic2.png")
+    };
 
     public NyxRendererEyezor(RenderManager renderManager) {
         super(renderManager, new NyxModelEyezor(), 0.5F);
@@ -31,9 +34,6 @@ public class NyxRendererEyezor extends RenderBiped<NyxEntityEyezor> {
 
     @Override
     protected ResourceLocation getEntityTexture(NyxEntityEyezor entity) {
-        switch (entity.getDataManager().get(NyxEntityEyezor.TYPE)) {
-            default: // Common
-                return BASIC;
-        }
+        return TEXTURES[entity.getType()];
     }
 }
