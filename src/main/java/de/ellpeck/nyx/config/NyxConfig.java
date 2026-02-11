@@ -29,13 +29,17 @@ public class NyxConfig {
     @Config.Comment("Settings for solar events")
     public static final EventsSolar EVENTS_SOLAR = new EventsSolar();
 
+    @Config.LangKey("config.nyx.falling_stars")
+    @Config.Comment("Settings for falling stars")
+    public static final FallingStars FALLING_STARS = new FallingStars();
+
     @Config.LangKey("config.nyx.meteors")
     @Config.Comment("Settings for meteors")
     public static final Meteors METEORS = new Meteors();
 
-    @Config.LangKey("config.nyx.falling_stars")
-    @Config.Comment("Settings for falling stars")
-    public static final FallingStars FALLING_STARS = new FallingStars();
+    @Config.LangKey("config.nyx.mod_integration")
+    @Config.Comment("Settings for mod integration")
+    public static final ModIntegration MOD_INTEGRATION = new ModIntegration();
 
     public static class MasterSwitches {
         @Config.Name("Events: Lunar")
@@ -661,6 +665,24 @@ public class NyxConfig {
                 "minecraft:lava",
                 "minecraft:water"
         };
+    }
+
+    public static class ModIntegration {
+        @Config.Name("Construct's Armory Integration")
+        @Config.Comment("Enables Construct's Armory integration (requires Tinkers' Construct integration to be enabled!)")
+        public boolean constructsArmoryIntegration = true;
+
+        @Config.Name("SimpleDifficulty Integration")
+        @Config.Comment("Enables SimpleDifficulty integration")
+        public boolean simpleDifficultyIntegration = true;
+
+        @Config.Name("Tinkers' Construct Integration")
+        @Config.Comment("Enables Tinkers' Construct integration")
+        public boolean tinkersConstructIntegration = true;
+
+        @Config.Name("Tough As Nails Integration")
+        @Config.Comment("Enables Tough As Nails integration")
+        public boolean toughAsNailsIntegration = true;
     }
 
     @Mod.EventBusSubscriber(modid = Nyx.ID)
