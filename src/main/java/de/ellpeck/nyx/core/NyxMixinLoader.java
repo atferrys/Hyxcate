@@ -26,6 +26,7 @@ public class NyxMixinLoader implements ILateMixinLoader {
 
     private static final Map<String, Predicate<Context>> commonMixinConfigs = ImmutableMap.copyOf(new HashMap<String, Predicate<Context>>() {
         {
+            put("mixins.nyx.compat.peacefulsurface.common.json", c -> c.isModPresent("peacefulsurface"));
             put("mixins.nyx.compat.urkazmoontools.common.json", c -> c.isModPresent("urkazmoontools"));
         }
     });
