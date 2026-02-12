@@ -2,6 +2,7 @@ package de.ellpeck.nyx.event;
 
 import de.ellpeck.nyx.Nyx;
 import de.ellpeck.nyx.capability.NyxWorld;
+import de.ellpeck.nyx.compat.gamestages.GameStages;
 import de.ellpeck.nyx.config.NyxConfig;
 import de.ellpeck.nyx.config.NyxData;
 import de.ellpeck.nyx.entity.NyxEntityEyezor;
@@ -229,6 +230,7 @@ public final class NyxEvents {
             int dimension = event.world.provider.getDimensionType().getId();
             if (NyxData.ALLOWED_DIMENSIONS_LUNAR.contains(dimension)) {
                 for (EntityPlayer player : event.world.playerEntities) {
+                    if (!GameStages.checkGameStageFallingStarEvents(player)) continue;
                     if (event.world.rand.nextFloat() > (data.currentLunarEvent instanceof NyxEventStarShower ? NyxConfig.FALLING_STARS.chanceShower : NyxConfig.FALLING_STARS.chance))
                         continue;
                     BlockPos startPos = player.getPosition().add(event.world.rand.nextGaussian() * 20, 0, event.world.rand.nextGaussian() * 20);
@@ -246,7 +248,7 @@ public final class NyxEvents {
         if (!event.world.isRemote && NyxConfig.MASTER_SWITCHES.meteorEventsEnabled && event.world.getTotalWorldTime() >= NyxConfig.METEORS.gracePeriod * 24000L && event.world.getTotalWorldTime() % 20 == 0) {
             if (event.world.playerEntities.isEmpty()) break meteors;
             EntityPlayer selectedPlayer = event.world.playerEntities.get(event.world.rand.nextInt(event.world.playerEntities.size()));
-            if (selectedPlayer == null) break meteors;
+            if (selectedPlayer == null || !GameStages.checkGameStageMeteorEvents(selectedPlayer)) break meteors;
             double spawnX = selectedPlayer.posX + MathHelper.nextDouble(event.world.rand, -NyxConfig.METEORS.spawnRadius, NyxConfig.METEORS.spawnRadius);
             double spawnZ = selectedPlayer.posZ + MathHelper.nextDouble(event.world.rand, -NyxConfig.METEORS.spawnRadius, NyxConfig.METEORS.spawnRadius);
             BlockPos spawnPos = new BlockPos(spawnX, 0, spawnZ);

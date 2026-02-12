@@ -147,6 +147,9 @@ dependencies {
     // PeacefulSurface
     implementation rfg.deobf('curse.maven:peacefulsurface-73112:2727271')
 
+    // Game Stages
+    implementation 'curse.maven:game-stages-268655:2951844'
+
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:
         String mixin = modUtils.enableMixins('zone.rong:mixinbooter:10.7', "mixins.${project.mod_id}.refmap.json")

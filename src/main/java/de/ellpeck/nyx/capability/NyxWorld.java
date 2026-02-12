@@ -1,6 +1,7 @@
 package de.ellpeck.nyx.capability;
 
 import de.ellpeck.nyx.compat.astralsorcery.AstralSorcery;
+import de.ellpeck.nyx.compat.gamestages.GameStages;
 import de.ellpeck.nyx.config.NyxConfig;
 import de.ellpeck.nyx.config.NyxData;
 import de.ellpeck.nyx.event.lunar.*;
@@ -87,8 +88,10 @@ public class NyxWorld implements ICapabilityProvider, INBTSerializable<NBTTagCom
 
     public void update() {
         if (NyxConfig.MASTER_SWITCHES.meteorEventsEnabled) updateMeteors();
-        if (NyxConfig.MASTER_SWITCHES.lunarEventsEnabled) updateLunarEvents();
-        if (NyxConfig.MASTER_SWITCHES.solarEventsEnabled) updateSolarEvents();
+        if (NyxConfig.MASTER_SWITCHES.lunarEventsEnabled && GameStages.checkGameStageLunarEvents(this.world))
+            updateLunarEvents();
+        if (NyxConfig.MASTER_SWITCHES.solarEventsEnabled && GameStages.checkGameStageSolarEvents(this.world))
+            updateSolarEvents();
     }
 
     public void updateMeteors() {

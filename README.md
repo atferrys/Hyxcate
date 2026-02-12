@@ -103,6 +103,7 @@
 - With [**Tinkers' Antique (Tinkers' Construct)**](https://www.curseforge.com/minecraft/mc-mods/tinkers-antique) installed, there are new tool materials to tinker with. You can find more information on our [documentation here](https://github.com/Elite-Modding-Team/Hyxcate/wiki/Tinkers'-Construct)!
 - With [**Antique Armory (Construct's Armory)**](https://www.curseforge.com/minecraft/mc-mods/antique-armory) installed, there are new armor materials to tinker with. You can find more information on our [documentation here](https://github.com/Elite-Modding-Team/Hyxcate/wiki/Tinkers'-Construct-(Construct's-Armory))!
 - With [**Tough As Nails**](https://www.curseforge.com/minecraft/mc-mods/tough-as-nails) or [**SimpleDifficulty**](https://www.curseforge.com/minecraft/mc-mods/simpledifficulty-for-underdog) installed, the environment temperature is the same as the Nether (configurable) on active Red Giant events.
+- With [**Game Stages**](https://www.curseforge.com/minecraft/mc-mods/game-stages) installed, celestial/meteor/falling star events can be controlled. See [this explanation page](https://github.com/Elite-Modding-Team/Hyxcate/wiki/Game-Stages).
 - For mod compatibility in general, please check **Mod Compatibility** on the wiki regarding known conflicts.
 - More to come!
 
