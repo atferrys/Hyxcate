@@ -148,6 +148,7 @@ dependencies {
     implementation rfg.deobf('curse.maven:peacefulsurface-73112:2727271')
 
     // Game Stages
+    implementation 'curse.maven:bookshelf-228525:2836960'
     implementation 'curse.maven:game-stages-268655:2951844'
 
     if (project.use_mixins.toBoolean()) {
