@@ -57,7 +57,9 @@ public final class NyxRegistry {
         NyxItems.setRepairItems();
 
         GameRegistry.addSmelting(new ItemStack(NyxBlocks.starBlock), new ItemStack(NyxBlocks.crackedStarBlock), 0.1F);
+        GameRegistry.addSmelting(new ItemStack(NyxItems.frezariteCrystal), new ItemStack(NyxItems.frezariteIngot), 1.5F);
         GameRegistry.addSmelting(new ItemStack(NyxBlocks.frezariteRock), new ItemStack(NyxItems.frezariteCrystal), 1.5F);
+        GameRegistry.addSmelting(new ItemStack(NyxItems.kreknoriteShard), new ItemStack(NyxItems.kreknoriteIngot), 1.5F);
         GameRegistry.addSmelting(new ItemStack(NyxBlocks.kreknoriteRock), new ItemStack(NyxItems.kreknoriteShard), 1.5F);
         GameRegistry.addSmelting(new ItemStack(NyxItems.meteoriteShard), new ItemStack(NyxItems.meteoriteIngot), 1.0F);
         GameRegistry.addSmelting(new ItemStack(NyxBlocks.meteoriteRock), new ItemStack(NyxItems.meteoriteShard), 1.0F);
