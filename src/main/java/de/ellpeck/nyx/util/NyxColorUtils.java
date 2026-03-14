@@ -71,4 +71,46 @@ public class NyxColorUtils {
         // Return a float array containing the color
         return new float[]{redDouble, greenDouble, blueDouble};
     }
+
+    /**
+     * Converts a float array representing RGB components to an RGB integer.
+     * The float array is expected to contain red, green, and blue values in the range 0.0 to 1.0.
+     *
+     * @param rgb The float array containing the color (red, green, blue).
+     * @return The resulting color as an RGB integer.
+     */
+    public static int getFloatArrayAsRgbInt(float[] rgb) {
+        // Clamp each component to the valid range and convert to 0–255 integer values
+        int red = Math.round(Math.max(0F, Math.min(1F, rgb[0])) * 255F);
+        int green = Math.round(Math.max(0F, Math.min(1F, rgb[1])) * 255F);
+        int blue = Math.round(Math.max(0F, Math.min(1F, rgb[2])) * 255F);
+
+        // Pack the components into a single RGB integer
+        return (red << 16) | (green << 8) | blue;
+    }
+
+    /**
+     * Converts a Vec3d containing RGB components to a float array.
+     * The vector components are expected to represent red (x), green (y), and blue (z),
+     * in the range 0.0 to 1.0.
+     *
+     * @param vec The Vec3d containing the color (x = red, y = green, z = blue).
+     * @return A float array containing the color (red, green, blue).
+     */
+    public static float[] getVec3dAsFloatArray(Vec3d vec) {
+        return new float[]{(float) vec.x, (float) vec.y, (float) vec.z};
+    }
+
+    /**
+     * Converts a float array representing RGB components to a Vec3d.
+     * The array is expected to contain red, green, and blue values,
+     * in the range 0.0 to 1.0.
+     *
+     * @param rgb The float array containing the color (red, green, blue).
+     * @return A Vec3d containing the color (x = red, y = green, z = blue).
+     */
+    public static Vec3d getFloatArrayAsVec3d(float[] rgb) {
+        return new Vec3d(rgb[0], rgb[1], rgb[2]);
+    }
+
 }
