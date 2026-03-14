@@ -92,6 +92,21 @@ public class NyxConfig {
         @Config.Comment("If celestial events should also tint underground areas (can look slightly jarring when disabled)")
         public boolean eventTintUnderground = true;
 
+        @Config.Name("Event Tint Lightmap transition duration")
+        @Config.Comment("Duration specified in ticks. Use -1 to disable transition")
+        @Config.RequiresMcRestart
+        public int eventTintLightmapDuration = 20 * 12;
+
+        @Config.Name("Event Tint Sky Color transition duration")
+        @Config.Comment("Duration specified in ticks. Use -1 to disable transition")
+        @Config.RequiresMcRestart
+        public int eventTintSkyColorDuration = 20 * 15;
+
+        @Config.Name("Event Tint Cloud Color transition duration")
+        @Config.Comment("Duration specified in ticks. Use -1 to disable transition")
+        @Config.RequiresMcRestart
+        public int eventTintCloudColorDuration = 20 * 5;
+
         @Config.Name("Event Notifications")
         @Config.Comment("If celestial events should be announced in chat when they start")
         public boolean eventNotifications = true;
