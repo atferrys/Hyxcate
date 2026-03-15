@@ -121,35 +121,35 @@ dependencies {
     implementation rfg.deobf('curse.maven:future-fireproof-1121231:6877387')
 
     // Antique Suite
-    implementation rfg.deobf('curse.maven:mantle-74924:2713386')
-    implementation rfg.deobf('curse.maven:tinkers-antique-1242239:7077817')
-    implementation rfg.deobf('curse.maven:antique-armory-1394222:7275086')
+    compileOnly rfg.deobf('curse.maven:mantle-74924:2713386')
+    compileOnly rfg.deobf('curse.maven:tinkers-antique-1242239:7077817')
+    compileOnly rfg.deobf('curse.maven:antique-armory-1394222:7275086')
 
     // Astral Sorcery
-    implementation rfg.deobf('curse.maven:astral-sorcery-241721:3044416')
+    compileOnly rfg.deobf('curse.maven:astral-sorcery-241721:3044416')
 
     // CraftTweaker
     implementation 'curse.maven:mtlib-253211:3308160'
     implementation 'curse.maven:crafttweaker-239197:6929088'
 
     // Tough As Nails
-    implementation rfg.deobf('curse.maven:tough-as-nails-246391:2710969')
+    compileOnly rfg.deobf('curse.maven:tough-as-nails-246391:2710969')
 
     // SimpleDifficulty for Underdog
-    implementation rfg.deobf('curse.maven:simpledifficulty-for-underdog-574162:6266763')
+    compileOnly rfg.deobf('curse.maven:simpledifficulty-for-underdog-574162:6266763')
 
     // Urkaz Moon Tools
-    implementation rfg.deobf('curse.maven:urkaz-moon-tools-362825:3283366')
+    compileOnly rfg.deobf('curse.maven:urkaz-moon-tools-362825:3283366')
 
     // Вращение Земли Майнкрафтская (Accurate day/night-cycles Mod)
-    implementation rfg.deobf('curse.maven:time-speed-mod-221053:5376135')
+    compileOnly rfg.deobf('curse.maven:time-speed-mod-221053:5376135')
 
     // PeacefulSurface
-    implementation rfg.deobf('curse.maven:peacefulsurface-73112:2727271')
+    compileOnly rfg.deobf('curse.maven:peacefulsurface-73112:2727271')
 
     // Game Stages
-    implementation 'curse.maven:bookshelf-228525:2836960'
-    implementation 'curse.maven:game-stages-268655:2951844'
+    compileOnly 'curse.maven:bookshelf-228525:2836960'
+    compileOnly 'curse.maven:game-stages-268655:2951844'
 
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:
