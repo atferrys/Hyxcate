@@ -149,17 +149,17 @@ public class NyxUtils {
 
     public static double getMeteorChance(World world, NyxWorld data) {
         DimensionType dim = world.provider.getDimensionType();
-        if (dim == DimensionType.THE_END) return NyxConfig.METEORS.chanceEnd;
+        if (dim == DimensionType.THE_END) return NyxConfig.METEORS.chanceEndM;
         if (!NyxData.ALLOWED_DIMENSIONS_LUNAR.contains(dim.getId())) return 0;
         boolean visitedGate = data.visitedDimensions.contains(DimensionType.getById(NyxConfig.METEORS.gateDimension).getName());
         if (!NyxWorld.isDaytime(world)) {
             if (data.currentLunarEvent instanceof NyxEventStarShower) {
-                return NyxConfig.METEORS.chanceStarShower;
+                return NyxConfig.METEORS.chanceStarShowerM;
             } else {
-                return visitedGate ? NyxConfig.METEORS.chanceAfterGateNight : NyxConfig.METEORS.chanceNight;
+                return visitedGate ? NyxConfig.METEORS.chanceAfterGateNightM : NyxConfig.METEORS.chanceNightM;
             }
         }
-        return visitedGate ? NyxConfig.METEORS.chanceAfterGate : NyxConfig.METEORS.chance;
+        return visitedGate ? NyxConfig.METEORS.chanceAfterGateM : NyxConfig.METEORS.chanceM;
     }
 
     @SideOnly(Side.CLIENT)

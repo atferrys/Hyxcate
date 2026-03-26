@@ -226,12 +226,12 @@ public final class NyxEvents {
         data.update();
 
         // Falling Stars
-        if (!event.world.isRemote && NyxConfig.MASTER_SWITCHES.fallingStarEventsEnabled && !NyxWorld.isDaytime(event.world) && event.world.getTotalWorldTime() % 20 == 0) {
+        if (!event.world.isRemote && NyxConfig.MASTER_SWITCHES.fallingStarEventsEnabled && !NyxWorld.isDaytime(event.world) && event.world.getTotalWorldTime() % 1200 == 0) {
             int dimension = event.world.provider.getDimensionType().getId();
             if (NyxData.ALLOWED_DIMENSIONS_LUNAR.contains(dimension)) {
                 for (EntityPlayer player : event.world.playerEntities) {
                     if (!GameStages.checkGameStageFallingStarEvents(player)) continue;
-                    if (event.world.rand.nextFloat() > (data.currentLunarEvent instanceof NyxEventStarShower ? NyxConfig.FALLING_STARS.chanceShower : NyxConfig.FALLING_STARS.chance))
+                    if (event.world.rand.nextFloat() > (data.currentLunarEvent instanceof NyxEventStarShower ? NyxConfig.FALLING_STARS.chanceShowerM : NyxConfig.FALLING_STARS.chanceM))
                         continue;
                     BlockPos startPos = player.getPosition().add(event.world.rand.nextGaussian() * 20, 0, event.world.rand.nextGaussian() * 20);
                     startPos = event.world.getPrecipitationHeight(startPos).up(MathHelper.getInt(event.world.rand, 32, 64));
@@ -245,7 +245,7 @@ public final class NyxEvents {
 
         // Meteors
         meteors:
-        if (!event.world.isRemote && NyxConfig.MASTER_SWITCHES.meteorEventsEnabled && event.world.getTotalWorldTime() >= NyxConfig.METEORS.gracePeriod * 24000L && event.world.getTotalWorldTime() % 20 == 0) {
+        if (!event.world.isRemote && NyxConfig.MASTER_SWITCHES.meteorEventsEnabled && event.world.getTotalWorldTime() >= NyxConfig.METEORS.gracePeriod * 24000L && event.world.getTotalWorldTime() % 1200 == 0) {
             if (event.world.playerEntities.isEmpty()) break meteors;
             EntityPlayer selectedPlayer = event.world.playerEntities.get(event.world.rand.nextInt(event.world.playerEntities.size()));
             if (selectedPlayer == null || !GameStages.checkGameStageMeteorEvents(selectedPlayer)) break meteors;

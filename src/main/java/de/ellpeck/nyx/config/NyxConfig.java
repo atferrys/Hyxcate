@@ -525,14 +525,14 @@ public class NyxConfig {
 
     public static class FallingStars {
         @Config.Name("Chance")
-        @Config.Comment("The chance in percent (1 = 100%) for a falling star to appear at night for each player per second")
+        @Config.Comment("The chance in percent (1 = 100%) for a falling star to appear at night for each player per minute")
         @Config.RangeDouble(min = 0.0, max = 1.0)
-        public double chance = 0.005;
+        public double chanceM = 0.3;
 
         @Config.Name("Chance During Showers")
-        @Config.Comment("The chance for a falling star to appear during a star shower for each player per second")
+        @Config.Comment("The chance for a falling star to appear during a star shower for each player per minute")
         @Config.RangeDouble(min = 0.0, max = 1.0)
-        public double chanceShower = 0.05;
+        public double chanceShowerM = 1.0;
 
         @Config.Name("Ambient Volume")
         @Config.Comment("The volume for the falling star ambient sound")
@@ -545,38 +545,38 @@ public class NyxConfig {
 
     public static class Meteors {
         @Config.Name("Chance")
-        @Config.Comment("The chance of a meteor spawning every second, during the day")
+        @Config.Comment("The chance of a meteor spawning every minute, during the day")
         @Config.RangeDouble(min = 0.0)
-        public double chance = 0.00007;
+        public double chanceM = 0.0042;
 
         @Config.Name("Chance At Night")
-        @Config.Comment("The chance of a meteor spawning every second, during nighttime")
+        @Config.Comment("The chance of a meteor spawning every minute, during nighttime")
         @Config.RangeDouble(min = 0.0)
-        public double chanceNight = 0.0012;
+        public double chanceNightM = 0.0072;
 
         @Config.Name("Gate Dimension")
         @Config.Comment("The dimension that needs to be entered to increase the spawning of meteors")
         public int gateDimension = 1;
 
         @Config.Name("Chance After Gate Visit")
-        @Config.Comment("The chance of a meteor spawning every second, during the day, after the gate dimension has been entered once")
+        @Config.Comment("The chance of a meteor spawning every minute, during the day, after the gate dimension has been entered once")
         @Config.RangeDouble(min = 0.0)
-        public double chanceAfterGate = 0.0001;
+        public double chanceAfterGateM = 0.006;
 
         @Config.Name("Chance After Gate Visit At Night")
-        @Config.Comment("The chance of a meteor spawning every second, during the night, after the gate dimension has been entered once")
+        @Config.Comment("The chance of a meteor spawning every minute, during the night, after the gate dimension has been entered once")
         @Config.RangeDouble(min = 0.0)
-        public double chanceAfterGateNight = 0.0015;
+        public double chanceAfterGateNightM = 0.09;
 
         @Config.Name("Chance During Star Showers")
-        @Config.Comment("The chance of a meteor spawning every second, during a star shower")
+        @Config.Comment("The chance of a meteor spawning every minute, during a star shower")
         @Config.RangeDouble(min = 0.0)
-        public double chanceStarShower = 0.0024;
+        public double chanceStarShowerM = 0.144;
 
         @Config.Name("Chance In The End")
-        @Config.Comment("The chance of a meteor spawning every second, in the end dimension")
+        @Config.Comment("The chance of a meteor spawning every minute, in the end dimension")
         @Config.RangeDouble(min = 0.0)
-        public double chanceEnd = 0.0015;
+        public double chanceEndM = 0.09;
 
         @Config.Name("Grace Period")
         @Config.Comment("The amount of days that should pass after world creation until meteors can fall")
