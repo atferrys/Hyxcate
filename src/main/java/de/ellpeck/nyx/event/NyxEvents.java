@@ -258,7 +258,8 @@ public final class NyxEvents {
 
     @SubscribeEvent
     public static void onSprintStart(LivingSprintStartEvent event) {
-        if (event.getEntityLiving().isPotionActive(NyxPotions.PARALYSIS) || event.getEntityLiving().isPotionActive(NyxPotions.PARALYSIS)) {
+        // Prevents affected players from sprinting
+        if (event.getEntityLiving().isPotionActive(NyxPotions.DEEP_FREEZE) || event.getEntityLiving().isPotionActive(NyxPotions.PARALYSIS)) {
             event.setCanceled(true);
         }
     }
@@ -364,6 +365,13 @@ public final class NyxEvents {
         if (NyxConfig.EVENTS_LUNAR.BLOOD_MOON.mobsVanish && !entity.world.isRemote && NyxWorld.isDaytime(entity.world) && entity.getEntityData().getBoolean(Nyx.ID + ":blood_moon_spawn")) {
             ((WorldServer) entity.world).spawnParticle(EnumParticleTypes.SMOKE_LARGE, entity.posX, entity.posY, entity.posZ, 10, 0.5, 1, 0.5, 0);
             entity.setDead();
+        }
+
+        // Stop affected players that are currently sprinting
+        if (entity.isSprinting()) {
+            if (entity.isPotionActive(NyxPotions.DEEP_FREEZE) || entity.isPotionActive(NyxPotions.PARALYSIS)) {
+                entity.setSprinting(false);
+            }
         }
     }
 
