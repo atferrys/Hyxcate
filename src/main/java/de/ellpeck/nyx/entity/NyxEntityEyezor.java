@@ -3,10 +3,7 @@ package de.ellpeck.nyx.entity;
 import de.ellpeck.nyx.config.NyxConfig;
 import de.ellpeck.nyx.init.NyxLootTables;
 import de.ellpeck.nyx.init.NyxSoundEvents;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIAttackRanged;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.monster.EntityZombie;
@@ -65,13 +62,13 @@ public class NyxEntityEyezor extends EntityZombie implements IRangedAttackMob {
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound) {
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setInteger("type", this.dataManager.get(TYPE));
     }
 
     @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
+    public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.dataManager.set(TYPE, compound.getInteger("type"));
     }
@@ -114,6 +111,21 @@ public class NyxEntityEyezor extends EntityZombie implements IRangedAttackMob {
     }
 
     @Override
+    public boolean isOnSameTeam(@Nonnull Entity entity) {
+        if (entity == null) {
+            return false;
+        } else if (entity == this) {
+            return true;
+        } else if (super.isOnSameTeam(entity)) {
+            return true;
+        } else if (entity instanceof NyxEntityEyezor) {
+            return this.getTeam() == null && entity.getTeam() == null;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public void setSwingingArms(boolean swingingArms) {
     }
 
@@ -125,7 +137,7 @@ public class NyxEntityEyezor extends EntityZombie implements IRangedAttackMob {
 
     @Nonnull
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource) {
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource) {
         return NyxSoundEvents.ENTITY_EYEZOR_HURT.getSoundEvent();
     }
 

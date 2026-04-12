@@ -529,8 +529,11 @@ public final class NyxEvents {
 
     @SubscribeEvent
     public static void onAttackEvent(LivingAttackEvent event) {
-        for (ItemStack stack : event.getEntityLiving().getArmorInventoryList()) {
+        EntityLivingBase entity = event.getEntityLiving();
+        DamageSource damageSource = event.getSource();
+        Entity trueSource = damageSource.getTrueSource();
 
+        for (ItemStack stack : event.getEntityLiving().getArmorInventoryList()) {
             // Prevents screen shaking and damage sound from immune damage
             if (stack.getItem() == NyxItems.meteoriteBoots ||
                     stack.getItem() == NyxItems.frezariteBoots ||
@@ -539,6 +542,13 @@ public final class NyxEvents {
                 if (event.getSource() == DamageSource.HOT_FLOOR) {
                     event.setCanceled(true);
                 }
+            }
+        }
+
+        // Don't harm other mobs of the same team
+        if (trueSource instanceof NyxEntityEyezor && trueSource != null) {
+            if (entity.isOnSameTeam(trueSource)) {
+                event.setCanceled(true);
             }
         }
     }
