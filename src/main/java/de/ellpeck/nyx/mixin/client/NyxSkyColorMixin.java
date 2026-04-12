@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ForgeHooksClient;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,7 +24,10 @@ public abstract class NyxSkyColorMixin {
     @Unique
     private static final NyxColorTransition hyxcate$colorTransition = new NyxColorTransition(NyxConfig.GENERAL.eventTintSkyColorDuration);
 
-    @Inject(method = "getSkyBlendColour", at = @At("TAIL"), cancellable = true)
+    @Shadow
+    private static int skyRGBMultiplier;
+
+    @Inject(method = "getSkyBlendColour", at = @At("TAIL"))
     private static void nyxSetSkyColor(World world, BlockPos center, CallbackInfoReturnable<Integer> cir) {
 
         if(!NyxConfig.GENERAL.eventTint) {
@@ -63,7 +67,7 @@ public abstract class NyxSkyColorMixin {
 
         if(hyxcate$colorTransition.isOverriding()) {
             float[] customSkyColors = hyxcate$colorTransition.getCurrentColor(worldTime, hyxcate$mc.getRenderPartialTicks());
-            cir.setReturnValue(NyxColorUtils.getFloatArrayAsRgbInt(customSkyColors));
+            skyRGBMultiplier = NyxColorUtils.getFloatArrayAsRgbInt(customSkyColors);
         }
 
     }
