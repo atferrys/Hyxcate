@@ -3,13 +3,11 @@ package de.ellpeck.nyx.item;
 import com.google.common.collect.Multimap;
 import com.invadermonky.futurefireproof.api.IFireproofItem;
 import de.ellpeck.nyx.init.NyxAttributes;
-import de.ellpeck.nyx.init.NyxEnchantments;
 import de.ellpeck.nyx.init.NyxItems;
 import de.ellpeck.nyx.item.tool.INyxTool;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -41,7 +39,7 @@ public class NyxItemSword extends ItemSword implements INyxTool, IFireproofItem 
     public NyxItemSword(ToolMaterial material, double attackSpeed, int magnetizationAmount, double paralysisChance, EnumRarity rarity) {
         super(material);
         this.attackSpeed = attackSpeed;
-        this.magnetizationAmount = new AttributeModifier(NyxAttributes.MAGNETIZATION_ID.toString(), magnetizationAmount, 0);
+        this.magnetizationAmount = new AttributeModifier(NyxAttributes.MAGNETIZATION_ID, "Magnetization modifier", magnetizationAmount, 0);
         this.paralysisChance = new AttributeModifier(NyxAttributes.PARALYSIS_ID.toString(), paralysisChance, 1);
         this.material = material;
         this.rarity = rarity;
@@ -122,11 +120,5 @@ public class NyxItemSword extends ItemSword implements INyxTool, IFireproofItem 
     @Override
     public ToolMaterial getToolMaterial() {
         return material;
-    }
-
-    @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        if (enchantment == NyxEnchantments.magnetization && this.magnetizationAmount.getAmount() > 0) return false;
-        return super.canApplyAtEnchantingTable(stack, enchantment);
     }
 }

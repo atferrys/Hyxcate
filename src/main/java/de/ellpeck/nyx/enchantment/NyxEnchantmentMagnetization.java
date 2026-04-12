@@ -23,6 +23,6 @@ public class NyxEnchantmentMagnetization extends NyxEnchantment {
 
     @Override
     public int getMaxLevel() {
-        return 5;
+        return 4;
     }
 }

@@ -1,5 +1,6 @@
 package de.ellpeck.nyx.event;
 
+import com.expandedevents.api.event.ItemAttributeModifierEvent;
 import de.ellpeck.nyx.Nyx;
 import de.ellpeck.nyx.capability.NyxWorld;
 import de.ellpeck.nyx.compat.gamestages.GameStages;
@@ -41,8 +42,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -55,6 +58,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -72,6 +76,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.mutable.MutableInt;
 
 import javax.vecmath.Vector3d;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -126,9 +131,9 @@ public final class NyxEvents {
             player.getEntityData().removeTag(Nyx.ID + ":leap_start");
         }
 
+        // TODO: Fix this for armor
         for (ItemStack stack : player.getEquipmentAndArmor()) {
             IAttributeInstance magnetization = player.getEntityAttribute(NyxAttributes.MAGNETIZATION);
-            magnetizationLevel = EnchantmentHelper.getEnchantmentLevel(NyxEnchantments.magnetization, stack);
 
             // Magnetization Attribute
             if (magnetization != null && !magnetization.getModifiers().isEmpty()) {
@@ -137,15 +142,9 @@ public final class NyxEvents {
                 for (AttributeModifier attributemodifier : magnetization.getModifiers()) {
                     magnetizationValue += (float) attributemodifier.getAmount();
                 }
-                if (magnetizationValue <= 0) return;
 
                 // Draw nearby items, with strength being based on attribute amount
                 pullItems(player, 6.0D, 0.004F + (0.002F * magnetizationValue));
-            }
-
-            // Magnetization Enchantment, controlled by the enchantment level
-            if (magnetizationLevel != 0) {
-                pullItems(player, 6.0D, 0.004F + (0.002F * magnetizationLevel));
             }
         }
 
@@ -188,6 +187,71 @@ public final class NyxEvents {
             item.onGround = false;
 
             pulled++;
+        }
+    }
+
+    // Add Magnetization when the Magnetiferous enchantment is active
+    @SubscribeEvent
+    public static void onItemAttribute(ItemAttributeModifierEvent event) {
+        ItemStack stack = event.getItemStack();
+        magnetizationLevel = EnchantmentHelper.getEnchantmentLevel(NyxEnchantments.magnetization, stack);
+        double bonus = 0.5D * magnetizationLevel;
+
+        // Checks are a bit hacky but we don't want the slot types to overlap
+        if (magnetizationLevel > 0 && stack.getItem() instanceof ItemArmor && event.getSlotType() == ((ItemArmor) stack.getItem()).armorType) {
+            Collection<AttributeModifier> modifiers = event.getOriginalModifiers().get(NyxAttributes.MAGNETIZATION.getName());
+            AttributeModifier toModify = null;
+
+            for (AttributeModifier modifier : modifiers) {
+                if (modifier.getID().equals(NyxAttributes.MAGNETIZATION_ID)) {
+                    toModify = modifier;
+                    break;
+                }
+            }
+
+            if (toModify != null) {
+                event.removeModifier(NyxAttributes.MAGNETIZATION, toModify);
+                event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
+                        toModify.getID(),
+                        toModify.getName(),
+                        toModify.getAmount() + bonus,
+                        toModify.getOperation())
+                );
+            } else {
+                event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
+                        NyxAttributes.MAGNETIZATION_ID,
+                        "Magnetization modifier",
+                        bonus,
+                        Constants.AttributeModifierOperation.ADD)
+                );
+            }
+        } else if (magnetizationLevel > 0 && !(stack.getItem() instanceof ItemArmor) && event.getSlotType() == EntityEquipmentSlot.MAINHAND) {
+            Collection<AttributeModifier> modifiers = event.getOriginalModifiers().get(NyxAttributes.MAGNETIZATION.getName());
+            AttributeModifier toModify = null;
+
+            for (AttributeModifier modifier : modifiers) {
+                if (modifier.getID().equals(NyxAttributes.MAGNETIZATION_ID)) {
+                    toModify = modifier;
+                    break;
+                }
+            }
+
+            if (toModify != null) {
+                event.removeModifier(NyxAttributes.MAGNETIZATION, toModify);
+                event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
+                        toModify.getID(),
+                        toModify.getName(),
+                        toModify.getAmount() + bonus,
+                        toModify.getOperation())
+                );
+            } else {
+                event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
+                        NyxAttributes.MAGNETIZATION_ID,
+                        "Magnetization modifier",
+                        bonus,
+                        Constants.AttributeModifierOperation.ADD)
+                );
+            }
         }
     }
 
@@ -402,7 +466,8 @@ public final class NyxEvents {
                 }
 
                 // TODO: Add a configure list of mobs that can and cannot get effects. Maybe we could do this for all events as well
-                if (effect != null && !(entity instanceof EntityCreeper)) entity.addPotionEffect(new PotionEffect(effect, Integer.MAX_VALUE));
+                if (effect != null && !(entity instanceof EntityCreeper))
+                    entity.addPotionEffect(new PotionEffect(effect, Integer.MAX_VALUE));
             }
         } else if (nyx.currentLunarEvent instanceof NyxEventStarShower) {
             if (NyxConfig.EVENTS_LUNAR.STAR_SHOWER.spawnsExtraChance > 0 && entity.world.rand.nextInt(NyxConfig.EVENTS_LUNAR.STAR_SHOWER.spawnsExtraChance) == 0) {

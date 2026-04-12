@@ -3,11 +3,9 @@ package de.ellpeck.nyx.item;
 import com.google.common.collect.Multimap;
 import com.invadermonky.futurefireproof.api.IFireproofItem;
 import de.ellpeck.nyx.init.NyxAttributes;
-import de.ellpeck.nyx.init.NyxEnchantments;
 import de.ellpeck.nyx.init.NyxItems;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentFrostWalker;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -37,7 +35,7 @@ public class NyxItemArmor extends ItemArmor implements IFireproofItem {
 
     public NyxItemArmor(ArmorMaterial material, int renderIndex, EntityEquipmentSlot equipmentSlot, int magnetizationAmount, double explosiveResistance, EnumRarity rarity) {
         super(material, renderIndex, equipmentSlot);
-        this.magnetizationAmount = new AttributeModifier(NyxAttributes.MAGNETIZATION_ID.toString(), magnetizationAmount, 0);
+        this.magnetizationAmount = new AttributeModifier(NyxAttributes.MAGNETIZATION_ID, "Magnetization modifier", magnetizationAmount, 0);
         this.explosiveResistance = new AttributeModifier(NyxAttributes.EXPLOSION_RESISTANCE_ID.toString(), explosiveResistance, 1);
         this.rarity = rarity;
     }
@@ -63,7 +61,6 @@ public class NyxItemArmor extends ItemArmor implements IFireproofItem {
         // Full set effects
         // Frezarite - Water Breathing
         if ((boots.getItem() == NyxItems.frezariteBoots && chestplate.getItem() == NyxItems.frezariteChestplate && helmet.getItem() == NyxItems.frezariteHelmet && leggings.getItem() == NyxItems.frezariteLeggings)) {
-
             player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 2, 0, true, false));
         }
 
@@ -98,11 +95,5 @@ public class NyxItemArmor extends ItemArmor implements IFireproofItem {
         }
 
         return multimap;
-    }
-
-    @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        if (enchantment == NyxEnchantments.magnetization && this.magnetizationAmount.getAmount() > 0) return false;
-        return super.canApplyAtEnchantingTable(stack, enchantment);
     }
 }
