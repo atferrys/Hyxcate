@@ -204,7 +204,7 @@ public final class NyxEvents {
             AttributeModifier toModify = null;
 
             for (AttributeModifier modifier : modifiers) {
-                if (modifier.getID().equals(NyxAttributes.MAGNETIZATION_ID)) {
+                if (modifier.getID().equals(NyxAttributes.MAGNETIZATION_ARMOR_ID)) {
                     toModify = modifier;
                     break;
                 }
@@ -220,7 +220,7 @@ public final class NyxEvents {
                 );
             } else {
                 event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
-                        NyxAttributes.MAGNETIZATION_ID,
+                        NyxAttributes.MAGNETIZATION_ARMOR_ID,
                         "Magnetization modifier",
                         bonus,
                         Constants.AttributeModifierOperation.ADD)
@@ -231,7 +231,7 @@ public final class NyxEvents {
             AttributeModifier toModify = null;
 
             for (AttributeModifier modifier : modifiers) {
-                if (modifier.getID().equals(NyxAttributes.MAGNETIZATION_ID)) {
+                if (modifier.getID().equals(NyxAttributes.MAGNETIZATION_TOOL_ID)) {
                     toModify = modifier;
                     break;
                 }
@@ -247,7 +247,7 @@ public final class NyxEvents {
                 );
             } else {
                 event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
-                        NyxAttributes.MAGNETIZATION_ID,
+                        NyxAttributes.MAGNETIZATION_TOOL_ID,
                         "Magnetization modifier",
                         bonus,
                         Constants.AttributeModifierOperation.ADD)

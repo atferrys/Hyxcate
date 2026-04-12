@@ -35,7 +35,7 @@ public class NyxItemAxe extends ItemAxe implements INyxTool, IFireproofItem {
 
     public NyxItemAxe(ToolMaterial material, float damage, float speed, int magnetizationAmount, double paralysisChance, EnumRarity rarity) {
         super(material, damage - 1.0F, speed - 4.0F);
-        this.magnetizationAmount = new AttributeModifier(NyxAttributes.MAGNETIZATION_ID, "Magnetization modifier", magnetizationAmount, 0);
+        this.magnetizationAmount = new AttributeModifier(NyxAttributes.MAGNETIZATION_TOOL_ID, "Magnetization modifier", magnetizationAmount, 0);
         this.paralysisChance = new AttributeModifier(NyxAttributes.PARALYSIS_ID.toString(), paralysisChance, 1);
         this.material = material;
         this.rarity = rarity;

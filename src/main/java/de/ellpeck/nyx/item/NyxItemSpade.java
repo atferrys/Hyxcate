@@ -39,7 +39,7 @@ public class NyxItemSpade extends ItemSpade implements INyxTool, IFireproofItem 
     public NyxItemSpade(ToolMaterial material, double attackSpeed, int magnetizationAmount, double paralysisChance, EnumRarity rarity) {
         super(material);
         this.attackSpeed = attackSpeed;
-        this.magnetizationAmount = new AttributeModifier(NyxAttributes.MAGNETIZATION_ID, "Magnetization modifier", magnetizationAmount, 0);
+        this.magnetizationAmount = new AttributeModifier(NyxAttributes.MAGNETIZATION_TOOL_ID, "Magnetization modifier", magnetizationAmount, 0);
         this.paralysisChance = new AttributeModifier(NyxAttributes.PARALYSIS_ID.toString(), paralysisChance, 1);
         this.material = material;
         this.rarity = rarity;

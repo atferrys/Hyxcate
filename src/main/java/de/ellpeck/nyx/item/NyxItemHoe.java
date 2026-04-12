@@ -35,7 +35,7 @@ public class NyxItemHoe extends ItemHoe implements INyxTool, IFireproofItem {
 
     public NyxItemHoe(ToolMaterial material, int magnetizationAmount, double paralysisChance, EnumRarity rarity) {
         super(material);
-        this.magnetizationAmount = new AttributeModifier(NyxAttributes.MAGNETIZATION_ID, "Magnetization modifier", magnetizationAmount, 0);
+        this.magnetizationAmount = new AttributeModifier(NyxAttributes.MAGNETIZATION_TOOL_ID, "Magnetization modifier", magnetizationAmount, 0);
         this.paralysisChance = new AttributeModifier(NyxAttributes.PARALYSIS_ID.toString(), paralysisChance, 1);
         this.material = material;
         this.rarity = rarity;
