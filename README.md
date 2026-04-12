@@ -1,4 +1,4 @@
-[![Requires MixinBooter](https://img.shields.io/badge/Requires-MixinBooter-C45D19.svg?labelColor=&style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/mixin-booter) ![License ARR](https://img.shields.io/badge/License-All%20Rights%20Reserved-C45D19.svg?labelColor=34495&color=C45D19&style=for-the-badge)
+[![Requires MixinBooter](https://img.shields.io/badge/Requires-MixinBooter-C45D19.svg?labelColor=&style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/mixin-booter) [![Requires Expanded Events](https://img.shields.io/badge/Requires-Expanded%20Events-C45D19.svg?labelColor=&style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/expanded-events) ![License ARR](https://img.shields.io/badge/License-All%20Rights%20Reserved-C45D19.svg?labelColor=34495&color=C45D19&style=for-the-badge)
 
 # Hyxcate
 
@@ -86,14 +86,14 @@
 #### 📚 **Attributes**
 
 - **Explosion Resistance:** Exclusive to **Tektite** armor, it reduces damage against explosions similar to **Blast Protection**. The maximum **Explosion Resistance** is **+100%**.
-- **Magnetization:** Exclusive to **Meteorite** armor and tools, nearby items will be drawn towards you. The higher the **Magnetization**, the higher the pull strength. The maximum **Magnetization** is **+10**.
+- **Magnetization:** Nearby items will be drawn towards you. The higher the **Magnetization**, the higher the pull strength. The maximum **Magnetization** is **+10**.
 - **Paralysis Chance:** Exclusive to **Tektite** tools, it will have a chance to inflict **Paralysis** on the hit target. The maximum **Paralysis Chance** is **+100%**.
 
 #### 📖 **Enchantments**
 
 - **Lunar Edge:** Adds bonus melee damage to the affected armor piece similar to **Sharpness**, the amount of bonus melee damage applied is increased during the night. Incompatible with **Bane of Arthropods**, **Sharpness**, and **Smite**. The max level is **V**.
 - **Lunar Shield:** Adds bonus damage reduction to the affected armor piece similar to **Protection**, the amount of damage reduction applied is increased during the night. Incompatible with **Blast Protection**, **Fire Protection**, **Projectile Protection**, and **Protection**. The max level is **IV**.
-- **Magnetization:** Enchantment counterpart of the attribute of the same name, when applied to any tool or armor, nearby items will be drawn towards you. Each level will increase the pull strength. Incompatible with **Meteorite** equipment. The max level is **V**.
+- **Magnetiferous:** Adds +0.5 Magnetization per level. The max level is **IV**.
 
 ### 🔁 **Mod Integration**
 
