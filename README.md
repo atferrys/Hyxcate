@@ -1,4 +1,4 @@
-[![Requires MixinBooter](https://img.shields.io/badge/Requires-MixinBooter-C45D19.svg?labelColor=&style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/mixin-booter) ![License ARR](https://img.shields.io/badge/License-All%20Rights%20Reserved-C45D19.svg?labelColor=34495&color=C45D19&style=for-the-badge)
+[![Requires MixinBooter](https://img.shields.io/badge/Requires-MixinBooter-C45D19.svg?labelColor=&style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/mixin-booter) [![Requires Expanded Events](https://img.shields.io/badge/Requires-Expanded-Events-C45D19.svg?labelColor=&style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/expanded-events) ![License ARR](https://img.shields.io/badge/License-All%20Rights%20Reserved-C45D19.svg?labelColor=34495&color=C45D19&style=for-the-badge)
 
 # Hyxcate
 
