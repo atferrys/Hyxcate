@@ -1,6 +1,7 @@
 package de.ellpeck.nyx.event;
 
 import com.expandedevents.api.event.ItemAttributeModifierEvent;
+import com.expandedevents.api.event.LivingSprintStartEvent;
 import de.ellpeck.nyx.Nyx;
 import de.ellpeck.nyx.capability.NyxWorld;
 import de.ellpeck.nyx.compat.gamestages.GameStages;
@@ -252,6 +253,13 @@ public final class NyxEvents {
                         Constants.AttributeModifierOperation.ADD)
                 );
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onSprintStart(LivingSprintStartEvent event) {
+        if (event.getEntityLiving().isPotionActive(NyxPotions.PARALYSIS) || event.getEntityLiving().isPotionActive(NyxPotions.PARALYSIS)) {
+            event.setCanceled(true);
         }
     }
 
