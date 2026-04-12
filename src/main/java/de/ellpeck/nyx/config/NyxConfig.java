@@ -94,16 +94,19 @@ public class NyxConfig {
 
         @Config.Name("Event Tint Lightmap transition duration")
         @Config.Comment("Duration specified in ticks. Use -1 to disable transition")
+        @Config.RangeInt(min = -1)
         @Config.RequiresMcRestart
         public int eventTintLightmapDuration = 20 * 12;
 
         @Config.Name("Event Tint Sky Color transition duration")
         @Config.Comment("Duration specified in ticks. Use -1 to disable transition")
+        @Config.RangeInt(min = -1)
         @Config.RequiresMcRestart
         public int eventTintSkyColorDuration = 20 * 15;
 
         @Config.Name("Event Tint Cloud Color transition duration")
         @Config.Comment("Duration specified in ticks. Use -1 to disable transition")
+        @Config.RangeInt(min = -1)
         @Config.RequiresMcRestart
         public int eventTintCloudColorDuration = 20 * 5;
 
