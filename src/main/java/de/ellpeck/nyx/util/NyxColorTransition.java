@@ -3,7 +3,7 @@ package de.ellpeck.nyx.util;
 public class NyxColorTransition {
 
     private final float[] startColor = new float[3];
-    private final float[] targetColor = new float[3];
+    private final float[] targetColor = new float[]{-1, -1, -1};
     private final float[] currentColor = new float[3];
 
     private long transitionStartTick = -1;
@@ -19,13 +19,23 @@ public class NyxColorTransition {
 
     public void transition(float[] startColor, float[] targetColor, long currentTime, TargetType targetType) {
 
-        if(targetType == this.targetType) {
+        if(targetType == TargetType.DEFAULT_COLOR && targetType == this.targetType) {
+            // Allow updating target mid-transition when going back to the default color
+            if(isTransitioning) {
+                System.arraycopy(targetColor, 0, this.targetColor, 0, 3);
+            }
             return;
         }
 
         // Avoid transition if target color is already the same
-        if(targetColor[0] == this.targetColor[0] || targetColor[1] == this.targetColor[1] || targetColor[2] == this.targetColor[2]) {
+        if(targetColor[0] == this.targetColor[0] &&
+           targetColor[1] == this.targetColor[1] &&
+           targetColor[2] == this.targetColor[2]) {
             return;
+        }
+
+        if(isOverriding()) {
+            startColor = currentColor;
         }
 
         System.arraycopy(startColor, 0, this.startColor, 0, 3);
@@ -55,9 +65,9 @@ public class NyxColorTransition {
                 : 1F;
 
         // Basic lerp between startColor and targetColor
-        for(int i = 0; i < 3; i++) {
-            currentColor[i] = startColor[i] + ((targetColor[i] - startColor[i]) * progress);
-        }
+        currentColor[0] = startColor[0] + ((targetColor[0] - startColor[0]) * progress);
+        currentColor[1] = startColor[1] + ((targetColor[1] - startColor[1]) * progress);
+        currentColor[2] = startColor[2] + ((targetColor[2] - startColor[2]) * progress);
 
         if(progress == 1F) {
             isTransitioning = false;
