@@ -193,132 +193,134 @@ public final class NyxEvents {
         }
     }
 
-    // Add Magnetization when the Magnetiferous enchantment is active
+    // Add attributes when their respective enchantments are active
     @SubscribeEvent
     public static void onItemAttribute(ItemAttributeModifierEvent event) {
         ItemStack stack = event.getItemStack();
 
-        magnetizationLevel = EnchantmentHelper.getEnchantmentLevel(NyxEnchantments.magnetization, stack);
-        double magnetizationBonus = 0.5D * magnetizationLevel;
+        if (NyxConfig.MASTER_SWITCHES.enchantmentsEnabled) {
+            magnetizationLevel = EnchantmentHelper.getEnchantmentLevel(NyxEnchantments.magnetization, stack);
+            double magnetizationBonus = 0.5D * magnetizationLevel;
 
-        lunarEdgeLevel = EnchantmentHelper.getEnchantmentLevel(NyxEnchantments.lunarEdge, stack);
-        double lunarEdgeBonus = NyxConfig.GENERAL.lunarEdgeDamageBase + (NyxConfig.GENERAL.lunarEdgeDamageSubsequent * lunarEdgeLevel);
+            lunarEdgeLevel = EnchantmentHelper.getEnchantmentLevel(NyxEnchantments.lunarEdge, stack);
+            double lunarEdgeBonus = NyxConfig.GENERAL.lunarEdgeDamageBase + (NyxConfig.GENERAL.lunarEdgeDamageSubsequent * lunarEdgeLevel);
 
-        solarEdgeLevel = EnchantmentHelper.getEnchantmentLevel(NyxEnchantments.solarEdge, stack);
-        double solarEdgeBonus = NyxConfig.GENERAL.solarEdgeDamageBase + (NyxConfig.GENERAL.solarEdgeDamageSubsequent * solarEdgeLevel);
+            solarEdgeLevel = EnchantmentHelper.getEnchantmentLevel(NyxEnchantments.solarEdge, stack);
+            double solarEdgeBonus = NyxConfig.GENERAL.solarEdgeDamageBase + (NyxConfig.GENERAL.solarEdgeDamageSubsequent * solarEdgeLevel);
 
-        if (lunarEdgeLevel > 0 && event.getSlotType() == EntityEquipmentSlot.MAINHAND) {
-            Collection<AttributeModifier> modifiers = event.getOriginalModifiers().get(NyxAttributes.LUNAR_DAMAGE.getName());
-            AttributeModifier toModify = null;
+            if (lunarEdgeLevel > 0 && event.getSlotType() == EntityEquipmentSlot.MAINHAND) {
+                Collection<AttributeModifier> modifiers = event.getOriginalModifiers().get(NyxAttributes.LUNAR_DAMAGE.getName());
+                AttributeModifier toModify = null;
 
-            for (AttributeModifier modifier : modifiers) {
-                if (modifier.getID().equals(NyxAttributes.LUNAR_DAMAGE_TOOL_ID)) {
-                    toModify = modifier;
-                    break;
+                for (AttributeModifier modifier : modifiers) {
+                    if (modifier.getID().equals(NyxAttributes.LUNAR_DAMAGE_TOOL_ID)) {
+                        toModify = modifier;
+                        break;
+                    }
+                }
+
+                if (toModify != null) {
+                    event.removeModifier(NyxAttributes.LUNAR_DAMAGE, toModify);
+                    event.addModifier(NyxAttributes.LUNAR_DAMAGE, new AttributeModifier(
+                            toModify.getID(),
+                            toModify.getName(),
+                            toModify.getAmount() + lunarEdgeBonus,
+                            toModify.getOperation())
+                    );
+                } else {
+                    event.addModifier(NyxAttributes.LUNAR_DAMAGE, new AttributeModifier(
+                            NyxAttributes.LUNAR_DAMAGE_TOOL_ID,
+                            "Lunar Damage modifier",
+                            lunarEdgeBonus,
+                            Constants.AttributeModifierOperation.ADD)
+                    );
                 }
             }
 
-            if (toModify != null) {
-                event.removeModifier(NyxAttributes.LUNAR_DAMAGE, toModify);
-                event.addModifier(NyxAttributes.LUNAR_DAMAGE, new AttributeModifier(
-                        toModify.getID(),
-                        toModify.getName(),
-                        toModify.getAmount() + lunarEdgeBonus,
-                        toModify.getOperation())
-                );
-            } else {
-                event.addModifier(NyxAttributes.LUNAR_DAMAGE, new AttributeModifier(
-                        NyxAttributes.LUNAR_DAMAGE_TOOL_ID,
-                        "Lunar Damage modifier",
-                        lunarEdgeBonus,
-                        Constants.AttributeModifierOperation.ADD)
-                );
-            }
-        }
+            if (solarEdgeLevel > 0 && event.getSlotType() == EntityEquipmentSlot.MAINHAND) {
+                Collection<AttributeModifier> modifiers = event.getOriginalModifiers().get(NyxAttributes.SOLAR_DAMAGE.getName());
+                AttributeModifier toModify = null;
 
-        if (solarEdgeLevel > 0 && event.getSlotType() == EntityEquipmentSlot.MAINHAND) {
-            Collection<AttributeModifier> modifiers = event.getOriginalModifiers().get(NyxAttributes.SOLAR_DAMAGE.getName());
-            AttributeModifier toModify = null;
+                for (AttributeModifier modifier : modifiers) {
+                    if (modifier.getID().equals(NyxAttributes.SOLAR_DAMAGE_TOOL_ID)) {
+                        toModify = modifier;
+                        break;
+                    }
+                }
 
-            for (AttributeModifier modifier : modifiers) {
-                if (modifier.getID().equals(NyxAttributes.SOLAR_DAMAGE_TOOL_ID)) {
-                    toModify = modifier;
-                    break;
+                if (toModify != null) {
+                    event.removeModifier(NyxAttributes.SOLAR_DAMAGE, toModify);
+                    event.addModifier(NyxAttributes.SOLAR_DAMAGE, new AttributeModifier(
+                            toModify.getID(),
+                            toModify.getName(),
+                            toModify.getAmount() + solarEdgeBonus,
+                            toModify.getOperation())
+                    );
+                } else {
+                    event.addModifier(NyxAttributes.SOLAR_DAMAGE, new AttributeModifier(
+                            NyxAttributes.SOLAR_DAMAGE_TOOL_ID,
+                            "Solar Damage modifier",
+                            solarEdgeBonus,
+                            Constants.AttributeModifierOperation.ADD)
+                    );
                 }
             }
 
-            if (toModify != null) {
-                event.removeModifier(NyxAttributes.SOLAR_DAMAGE, toModify);
-                event.addModifier(NyxAttributes.SOLAR_DAMAGE, new AttributeModifier(
-                        toModify.getID(),
-                        toModify.getName(),
-                        toModify.getAmount() + solarEdgeBonus,
-                        toModify.getOperation())
-                );
-            } else {
-                event.addModifier(NyxAttributes.SOLAR_DAMAGE, new AttributeModifier(
-                        NyxAttributes.SOLAR_DAMAGE_TOOL_ID,
-                        "Solar Damage modifier",
-                        solarEdgeBonus,
-                        Constants.AttributeModifierOperation.ADD)
-                );
-            }
-        }
+            // Checks are a bit hacky but we don't want the slot types to overlap
+            if (magnetizationLevel > 0 && stack.getItem() instanceof ItemArmor && event.getSlotType() == ((ItemArmor) stack.getItem()).armorType) {
+                Collection<AttributeModifier> modifiers = event.getOriginalModifiers().get(NyxAttributes.MAGNETIZATION.getName());
+                AttributeModifier toModify = null;
 
-        // Checks are a bit hacky but we don't want the slot types to overlap
-        if (magnetizationLevel > 0 && stack.getItem() instanceof ItemArmor && event.getSlotType() == ((ItemArmor) stack.getItem()).armorType) {
-            Collection<AttributeModifier> modifiers = event.getOriginalModifiers().get(NyxAttributes.MAGNETIZATION.getName());
-            AttributeModifier toModify = null;
-
-            for (AttributeModifier modifier : modifiers) {
-                if (modifier.getID().equals(NyxAttributes.MAGNETIZATION_ARMOR_ID)) {
-                    toModify = modifier;
-                    break;
+                for (AttributeModifier modifier : modifiers) {
+                    if (modifier.getID().equals(NyxAttributes.MAGNETIZATION_ARMOR_ID)) {
+                        toModify = modifier;
+                        break;
+                    }
                 }
-            }
 
-            if (toModify != null) {
-                event.removeModifier(NyxAttributes.MAGNETIZATION, toModify);
-                event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
-                        toModify.getID(),
-                        toModify.getName(),
-                        toModify.getAmount() + magnetizationBonus,
-                        toModify.getOperation())
-                );
-            } else {
-                event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
-                        NyxAttributes.MAGNETIZATION_ARMOR_ID,
-                        "Magnetization modifier",
-                        magnetizationBonus,
-                        Constants.AttributeModifierOperation.ADD)
-                );
-            }
-        } else if (magnetizationLevel > 0 && !(stack.getItem() instanceof ItemArmor) && event.getSlotType() == EntityEquipmentSlot.MAINHAND) {
-            Collection<AttributeModifier> modifiers = event.getOriginalModifiers().get(NyxAttributes.MAGNETIZATION.getName());
-            AttributeModifier toModify = null;
-
-            for (AttributeModifier modifier : modifiers) {
-                if (modifier.getID().equals(NyxAttributes.MAGNETIZATION_TOOL_ID)) {
-                    toModify = modifier;
-                    break;
+                if (toModify != null) {
+                    event.removeModifier(NyxAttributes.MAGNETIZATION, toModify);
+                    event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
+                            toModify.getID(),
+                            toModify.getName(),
+                            toModify.getAmount() + magnetizationBonus,
+                            toModify.getOperation())
+                    );
+                } else {
+                    event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
+                            NyxAttributes.MAGNETIZATION_ARMOR_ID,
+                            "Magnetization modifier",
+                            magnetizationBonus,
+                            Constants.AttributeModifierOperation.ADD)
+                    );
                 }
-            }
+            } else if (magnetizationLevel > 0 && !(stack.getItem() instanceof ItemArmor) && event.getSlotType() == EntityEquipmentSlot.MAINHAND) {
+                Collection<AttributeModifier> modifiers = event.getOriginalModifiers().get(NyxAttributes.MAGNETIZATION.getName());
+                AttributeModifier toModify = null;
 
-            if (toModify != null) {
-                event.removeModifier(NyxAttributes.MAGNETIZATION, toModify);
-                event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
-                        toModify.getID(),
-                        toModify.getName(),
-                        toModify.getAmount() + magnetizationBonus,
-                        toModify.getOperation())
-                );
-            } else {
-                event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
-                        NyxAttributes.MAGNETIZATION_TOOL_ID,
-                        "Magnetization modifier",
-                        magnetizationBonus,
-                        Constants.AttributeModifierOperation.ADD)
-                );
+                for (AttributeModifier modifier : modifiers) {
+                    if (modifier.getID().equals(NyxAttributes.MAGNETIZATION_TOOL_ID)) {
+                        toModify = modifier;
+                        break;
+                    }
+                }
+
+                if (toModify != null) {
+                    event.removeModifier(NyxAttributes.MAGNETIZATION, toModify);
+                    event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
+                            toModify.getID(),
+                            toModify.getName(),
+                            toModify.getAmount() + magnetizationBonus,
+                            toModify.getOperation())
+                    );
+                } else {
+                    event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
+                            NyxAttributes.MAGNETIZATION_TOOL_ID,
+                            "Magnetization modifier",
+                            magnetizationBonus,
+                            Constants.AttributeModifierOperation.ADD)
+                    );
+                }
             }
         }
     }

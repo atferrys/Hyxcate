@@ -119,19 +119,19 @@ public class NyxConfig {
         public boolean eventIntroSounds = true;
 
         @Config.Name("Lunar Edge Damage: Base")
-        @Config.Comment("The amount of base Lunar Damage received at Lunar Edge I")
+        @Config.Comment("The amount of base Lunar Damage received")
         public double lunarEdgeDamageBase = 0.5D;
 
         @Config.Name("Lunar Edge Damage: Subsequent")
-        @Config.Comment("The amount of additional Lunar Damage applied starting from Lunar Edge II")
+        @Config.Comment("The amount of additional Lunar Damage applied (per level) after the base damage")
         public double lunarEdgeDamageSubsequent = 0.5D;
 
         @Config.Name("Solar Edge Damage: Base")
-        @Config.Comment("The amount of base Solar Damage received at Solar Edge I")
+        @Config.Comment("The amount of base Solar Damage received")
         public double solarEdgeDamageBase = 0.5D;
 
         @Config.Name("Solar Edge Damage: Subsequent")
-        @Config.Comment("The amount of additional Solar Damage applied starting from Solar Edge II")
+        @Config.Comment("The amount of additional Solar Damage applied (per level) after the base damage")
         public double solarEdgeDamageSubsequent = 0.5D;
     }
 
