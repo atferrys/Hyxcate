@@ -118,7 +118,7 @@ public class NyxItems {
 
         if (NyxConfig.MASTER_SWITCHES.meteorGearEnabled) {
             meteoritePickaxe = initItem(new NyxItemPickaxe(meteoriteToolMaterial, 1.2D, 1, 0.0D, EnumRarity.RARE), "meteorite_pickaxe");
-            meteoriteAxe = initItem(new NyxItemAxe(meteoriteToolMaterial, 10.0F, 1.1F, 1, 0.0D, EnumRarity.EPIC), "meteorite_axe");
+            meteoriteAxe = initItem(new NyxItemAxe(meteoriteToolMaterial, 10.0F, 1.1F, 1, 0.0D, EnumRarity.RARE), "meteorite_axe");
             meteoriteShovel = initItem(new NyxItemSpade(meteoriteToolMaterial, 1.0D, 1, 0.0D, EnumRarity.RARE), "meteorite_shovel");
             meteoriteHoe = initItem(new NyxItemHoe(meteoriteToolMaterial, 1, 0.0D, EnumRarity.RARE), "meteorite_hoe");
             meteoriteSword = initItem(new NyxItemSword(meteoriteToolMaterial, 1.6D, 1, 0.0D, EnumRarity.RARE), "meteorite_sword");
