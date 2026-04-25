@@ -146,6 +146,8 @@ public final class NyxEvents {
                     magnetizationValue += (float) attributemodifier.getAmount();
                 }
 
+                if (magnetizationValue <= 0) return;
+
                 // Draw nearby items, with strength being based on attribute amount
                 pullItems(player, 6.0D, 0.004F + (0.002F * magnetizationValue));
             }
