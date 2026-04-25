@@ -1,9 +1,11 @@
 itemGroup.nyx=Hyxcate
 
 # Attributes
-attribute.name.nyx.explosion_resistance=Explosion Resistance
-attribute.name.nyx.magnetization=Magnetization
-attribute.name.nyx.paralysis=Paralysis Chance
+attribute.name.nyx.generic.explosion_resistance=Explosion Resistance
+attribute.name.nyx.generic.moon_damage=Lunar Damage
+attribute.name.nyx.generic.magnetization=Magnetization
+attribute.name.nyx.generic.paralysis=Paralysis Chance
+attribute.name.nyx.generic.sun_damage=Solar Damage
 
 # Blocks
 tile.nyx.star_block.name=Star Block
@@ -38,17 +40,19 @@ death.attack.nyx_deep_freeze.player=%1$s was frozen to death by %2$s
 death.attack.nyx_inferno=%1$s was consumed by the inferno
 death.attack.nyx_inferno.player=%1$s was infernalized to death by %2$s
 death.attack.nyx_laser=%1$s was vaporized by a laser beam
-death.attack.nyx_laser.player=%1$s vaporized by %2$s's laser beam
+death.attack.nyx_laser.player=%1$s was vaporized by %2$s's laser beam
 death.attack.nyx_paralysis=%1$s couldn't contain the watts
 death.attack.nyx_paralysis.player=%1$s was paralyzed to death by %2$s
 
 # Enchantments
 enchantment.nyx.lunar_edge=Lunar Edge
-enchantment.nyx.lunar_edge.desc=Increases damage of the item. Strength is affected by the current moon phase.
+enchantment.nyx.lunar_edge.desc=Increases damage of the item during the night.
 enchantment.nyx.lunar_shield=Lunar Shield
 enchantment.nyx.lunar_shield.desc=Reduces damage from most sources. Strength is affected by the current moon phase.
 enchantment.nyx.magnetization=Magnetiferous
 enchantment.nyx.magnetization.desc=Pulls items toward you. Each level increases the radius and strength.
+enchantment.nyx.solar_edge=Solar Edge
+enchantment.nyx.solar_edge.desc=Increases damage of the item during the day.
 
 # Entities
 entity.nyx.alien_creeper.name=Alien Creeper

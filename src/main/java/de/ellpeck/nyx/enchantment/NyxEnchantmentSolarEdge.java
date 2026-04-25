@@ -11,9 +11,9 @@ import javax.annotation.Nonnull;
 import static net.minecraft.inventory.EntityEquipmentSlot.MAINHAND;
 import static net.minecraft.inventory.EntityEquipmentSlot.OFFHAND;
 
-public class NyxEnchantmentLunarEdge extends NyxEnchantment {
-    public NyxEnchantmentLunarEdge() {
-        super("lunar_edge", Rarity.UNCOMMON, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{MAINHAND, OFFHAND});
+public class NyxEnchantmentSolarEdge extends NyxEnchantment {
+    public NyxEnchantmentSolarEdge() {
+        super("solar_edge", Rarity.UNCOMMON, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{MAINHAND, OFFHAND});
     }
 
     @Override
@@ -33,7 +33,7 @@ public class NyxEnchantmentLunarEdge extends NyxEnchantment {
 
     @Override
     protected boolean canApplyTogether(@Nonnull Enchantment ench) {
-        return super.canApplyTogether(ench) && !(ench instanceof NyxEnchantmentSolarEdge);
+        return super.canApplyTogether(ench) && !(ench instanceof NyxEnchantmentLunarEdge);
     }
 
     @Override

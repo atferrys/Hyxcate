@@ -5,6 +5,7 @@ import de.ellpeck.nyx.config.NyxConfig;
 import de.ellpeck.nyx.enchantment.NyxEnchantmentLunarEdge;
 import de.ellpeck.nyx.enchantment.NyxEnchantmentLunarShield;
 import de.ellpeck.nyx.enchantment.NyxEnchantmentMagnetization;
+import de.ellpeck.nyx.enchantment.NyxEnchantmentSolarEdge;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +17,7 @@ public class NyxEnchantments {
     public static Enchantment lunarEdge;
     public static Enchantment lunarShield;
     public static Enchantment magnetization;
+    public static Enchantment solarEdge;
 
     @SubscribeEvent
     public static void onEnchantmentRegistry(RegistryEvent.Register<Enchantment> event) {
@@ -23,7 +25,8 @@ public class NyxEnchantments {
             event.getRegistry().registerAll(
                     lunarEdge = new NyxEnchantmentLunarEdge(),
                     lunarShield = new NyxEnchantmentLunarShield(),
-                    magnetization = new NyxEnchantmentMagnetization()
+                    magnetization = new NyxEnchantmentMagnetization(),
+                    solarEdge = new NyxEnchantmentSolarEdge()
             );
         }
     }

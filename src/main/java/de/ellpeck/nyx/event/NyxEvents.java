@@ -33,6 +33,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -84,7 +85,9 @@ import java.util.stream.Collectors;
 
 @EventBusSubscriber(modid = Nyx.ID)
 public final class NyxEvents {
+    public static int lunarEdgeLevel;
     public static int magnetizationLevel;
+    public static int solarEdgeLevel;
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
@@ -132,7 +135,6 @@ public final class NyxEvents {
             player.getEntityData().removeTag(Nyx.ID + ":leap_start");
         }
 
-        // TODO: Fix this for armor
         for (ItemStack stack : player.getEquipmentAndArmor()) {
             IAttributeInstance magnetization = player.getEntityAttribute(NyxAttributes.MAGNETIZATION);
 
@@ -195,8 +197,73 @@ public final class NyxEvents {
     @SubscribeEvent
     public static void onItemAttribute(ItemAttributeModifierEvent event) {
         ItemStack stack = event.getItemStack();
+
         magnetizationLevel = EnchantmentHelper.getEnchantmentLevel(NyxEnchantments.magnetization, stack);
-        double bonus = 0.5D * magnetizationLevel;
+        double magnetizationBonus = 0.5D * magnetizationLevel;
+
+        lunarEdgeLevel = EnchantmentHelper.getEnchantmentLevel(NyxEnchantments.lunarEdge, stack);
+        double lunarEdgeBonus = NyxConfig.GENERAL.lunarEdgeDamageBase + (NyxConfig.GENERAL.lunarEdgeDamageSubsequent * lunarEdgeLevel);
+
+        solarEdgeLevel = EnchantmentHelper.getEnchantmentLevel(NyxEnchantments.solarEdge, stack);
+        double solarEdgeBonus = NyxConfig.GENERAL.solarEdgeDamageBase + (NyxConfig.GENERAL.solarEdgeDamageSubsequent * solarEdgeLevel);
+
+        if (lunarEdgeLevel > 0 && event.getSlotType() == EntityEquipmentSlot.MAINHAND) {
+            Collection<AttributeModifier> modifiers = event.getOriginalModifiers().get(NyxAttributes.LUNAR_DAMAGE.getName());
+            AttributeModifier toModify = null;
+
+            for (AttributeModifier modifier : modifiers) {
+                if (modifier.getID().equals(NyxAttributes.LUNAR_DAMAGE_TOOL_ID)) {
+                    toModify = modifier;
+                    break;
+                }
+            }
+
+            if (toModify != null) {
+                event.removeModifier(NyxAttributes.LUNAR_DAMAGE, toModify);
+                event.addModifier(NyxAttributes.LUNAR_DAMAGE, new AttributeModifier(
+                        toModify.getID(),
+                        toModify.getName(),
+                        toModify.getAmount() + lunarEdgeBonus,
+                        toModify.getOperation())
+                );
+            } else {
+                event.addModifier(NyxAttributes.LUNAR_DAMAGE, new AttributeModifier(
+                        NyxAttributes.LUNAR_DAMAGE_TOOL_ID,
+                        "Lunar Damage modifier",
+                        lunarEdgeBonus,
+                        Constants.AttributeModifierOperation.ADD)
+                );
+            }
+        }
+
+        if (solarEdgeLevel > 0 && event.getSlotType() == EntityEquipmentSlot.MAINHAND) {
+            Collection<AttributeModifier> modifiers = event.getOriginalModifiers().get(NyxAttributes.SOLAR_DAMAGE.getName());
+            AttributeModifier toModify = null;
+
+            for (AttributeModifier modifier : modifiers) {
+                if (modifier.getID().equals(NyxAttributes.SOLAR_DAMAGE_TOOL_ID)) {
+                    toModify = modifier;
+                    break;
+                }
+            }
+
+            if (toModify != null) {
+                event.removeModifier(NyxAttributes.SOLAR_DAMAGE, toModify);
+                event.addModifier(NyxAttributes.SOLAR_DAMAGE, new AttributeModifier(
+                        toModify.getID(),
+                        toModify.getName(),
+                        toModify.getAmount() + solarEdgeBonus,
+                        toModify.getOperation())
+                );
+            } else {
+                event.addModifier(NyxAttributes.SOLAR_DAMAGE, new AttributeModifier(
+                        NyxAttributes.SOLAR_DAMAGE_TOOL_ID,
+                        "Solar Damage modifier",
+                        solarEdgeBonus,
+                        Constants.AttributeModifierOperation.ADD)
+                );
+            }
+        }
 
         // Checks are a bit hacky but we don't want the slot types to overlap
         if (magnetizationLevel > 0 && stack.getItem() instanceof ItemArmor && event.getSlotType() == ((ItemArmor) stack.getItem()).armorType) {
@@ -215,14 +282,14 @@ public final class NyxEvents {
                 event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
                         toModify.getID(),
                         toModify.getName(),
-                        toModify.getAmount() + bonus,
+                        toModify.getAmount() + magnetizationBonus,
                         toModify.getOperation())
                 );
             } else {
                 event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
                         NyxAttributes.MAGNETIZATION_ARMOR_ID,
                         "Magnetization modifier",
-                        bonus,
+                        magnetizationBonus,
                         Constants.AttributeModifierOperation.ADD)
                 );
             }
@@ -242,14 +309,14 @@ public final class NyxEvents {
                 event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
                         toModify.getID(),
                         toModify.getName(),
-                        toModify.getAmount() + bonus,
+                        toModify.getAmount() + magnetizationBonus,
                         toModify.getOperation())
                 );
             } else {
                 event.addModifier(NyxAttributes.MAGNETIZATION, new AttributeModifier(
                         NyxAttributes.MAGNETIZATION_TOOL_ID,
                         "Magnetization modifier",
-                        bonus,
+                        magnetizationBonus,
                         Constants.AttributeModifierOperation.ADD)
                 );
             }
@@ -389,21 +456,6 @@ public final class NyxEvents {
         } else if (entity instanceof EntityWolf) {
             EntityWolf wolf = (EntityWolf) entity;
             wolf.targetTasks.addTask(3, new NyxAIWolfSpecialMoon(wolf));
-        }
-    }
-
-    @SubscribeEvent
-    public static void onExpDrop(LivingExperienceDropEvent event) {
-        if (NyxConfig.MASTER_SWITCHES.enchantmentsEnabled && NyxConfig.GENERAL.lunarEdgeMaxXPMultiplier > 0) {
-            EntityPlayer player = event.getAttackingPlayer();
-            if (player == null) return;
-            ItemStack held = player.getHeldItemMainhand();
-            int level = EnchantmentHelper.getEnchantmentLevel(NyxEnchantments.lunarEdge, held);
-            if (level <= 0) return;
-            float exp = event.getDroppedExperience();
-            float mod = level / (float) NyxEnchantments.lunarEdge.getMaxLevel();
-            mod *= (float) NyxConfig.GENERAL.lunarEdgeMaxXPMultiplier;
-            event.setDroppedExperience((int) (exp + MathHelper.floor(exp * mod)));
         }
     }
 
@@ -682,6 +734,25 @@ public final class NyxEvents {
             entity.world.playSound(null, entity.posX, entity.posY, entity.posZ, NyxSoundEvents.EFFECT_PARALYSIS_ZAP.getSoundEvent(), SoundCategory.NEUTRAL, 0.5F, 2.0F / (entity.world.rand.nextFloat() * 0.4F + 1.2F));
         }
 
+        if (entity instanceof EntityLivingBase && trueSource instanceof EntityLivingBase) {
+            long time = entity.world.getWorldTime() % 24000;
+            boolean isNight = (time >= 13000 && time < 23000);
+            boolean isDay = (time > 0 && time < 12000);
+
+            float extraDamage = 0.0F;
+
+            if (isNight) {
+                extraDamage += getAttributeValue((EntityLivingBase) trueSource, NyxAttributes.LUNAR_DAMAGE);
+            }
+
+            if (isDay) {
+                extraDamage += getAttributeValue((EntityLivingBase) trueSource, NyxAttributes.SOLAR_DAMAGE);
+            }
+
+            if (extraDamage <= 0) return;
+            event.setAmount(event.getAmount() + extraDamage);
+        }
+
         if (trueSource instanceof EntityPlayer) {
             Item heldItem = ((EntityPlayer) trueSource).getHeldItemMainhand().getItem();
 
@@ -694,6 +765,16 @@ public final class NyxEvents {
                 entity.hurtTime = 0;
             }
         }
+    }
+
+    private static float getAttributeValue(EntityLivingBase entity, IAttribute attribute) {
+        IAttributeInstance instance = entity.getEntityAttribute(attribute);
+
+        if (instance != null) {
+            return (float) instance.getAttributeValue();
+        }
+
+        return 0.0F;
     }
 
     @SideOnly(Side.CLIENT)

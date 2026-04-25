@@ -119,23 +119,20 @@ public class NyxConfig {
         public boolean eventIntroSounds = true;
 
         @Config.Name("Lunar Edge Damage: Base")
-        @Config.Comment("The amount of additional damage that will always be applied regardless of moon phase")
-        public int lunarEdgeDamageBase = 0;
+        @Config.Comment("The amount of base Lunar Damage received at Lunar Edge I")
+        public double lunarEdgeDamageBase = 0.5D;
 
-        @Config.Name("Lunar Edge Damage: Min Level")
-        @Config.Comment("The amount of additional damage that should be applied to an item with level 1 lunar edge on a full moon")
-        public double lunarEdgeDamageMinLevel = 1.0;
+        @Config.Name("Lunar Edge Damage: Subsequent")
+        @Config.Comment("The amount of additional Lunar Damage applied starting from Lunar Edge II")
+        public double lunarEdgeDamageSubsequent = 0.5D;
 
-        @Config.Name("Lunar Edge Damage: Max Level")
-        @Config.Comment("The amount of additional damage that should be applied to an item with max level lunar edge on a full moon")
-        public double lunarEdgeDamageMaxLevel = 3.0;
+        @Config.Name("Solar Edge Damage: Base")
+        @Config.Comment("The amount of base Solar Damage received at Solar Edge I")
+        public double solarEdgeDamageBase = 0.5D;
 
-        @Config.Name("Lunar Edge Max XP Multiplier")
-        @Config.Comment({"The max multiplier on the amount of XP added (which happens during a full moon)",
-                "Can be set to 0 to disable lunar edge XP gains",
-                "The multiplier scales up to the max according to the level and moon phase",
-                "Example: If the config option is set to 2.5, a full moon with max lunar edge level would give 3.5x XP and a new moon would give 1x XP"})
-        public double lunarEdgeMaxXPMultiplier = 1.0;
+        @Config.Name("Solar Edge Damage: Subsequent")
+        @Config.Comment("The amount of additional Solar Damage applied starting from Solar Edge II")
+        public double solarEdgeDamageSubsequent = 0.5D;
     }
 
     public static class Entities {
